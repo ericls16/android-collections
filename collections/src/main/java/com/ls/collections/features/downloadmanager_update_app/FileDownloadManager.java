@@ -1,4 +1,4 @@
-package com.cnlius.collections.features.download;
+package com.ls.collections.features.downloadmanager_update_app;
 
 import android.app.DownloadManager;
 import android.content.Context;

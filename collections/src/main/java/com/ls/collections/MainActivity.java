@@ -1,4 +1,4 @@
-package com.cnlius.designpattern;
+package com.ls.collections;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

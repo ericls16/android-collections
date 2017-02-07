@@ -1,4 +1,4 @@
-package com.cnlius.collections.features;
+package com.ls.collections.features;
 
 /**
  * Created by liu song on 2017/2/4.

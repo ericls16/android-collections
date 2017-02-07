@@ -1,4 +1,4 @@
-package com.cnlius.collections.ui;
+package com.ls.collections.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,9 +12,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.cnlius.collections.R;
-import com.cnlius.collections.databinding.ActivityAppUpdateByDownloadmanagerBinding;
-import com.cnlius.collections.features.download.DownLoadApk;
+
+import com.ls.collections.R;
+import com.ls.collections.databinding.ActivityAppUpdateByDownloadmanagerBinding;
+import com.ls.collections.features.downloadmanager_update_app.DownLoadApk;
 
 import java.util.List;
 
