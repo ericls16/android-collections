@@ -1,4 +1,4 @@
-package com.ls.collections.ui;
+package com.ls.collections.ui.features;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +19,7 @@ import com.ls.collections.features.downloadmanager_update_app.DownLoadApk;
 import java.util.List;
 
 /**
- * app更新
+ * DownLoadManager进行app更新
  * 1> 在通知栏显示现在进度.
  * Created by liu song on 2017/2/4.
  */

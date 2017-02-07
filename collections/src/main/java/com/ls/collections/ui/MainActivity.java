@@ -1,7 +1,9 @@
-package com.ls.collections;
+package com.ls.collections.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.ls.collections.R;
 
 public class MainActivity extends AppCompatActivity {
 
