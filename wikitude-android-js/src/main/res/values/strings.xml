@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">宽创AR</string>
+    <string name="location_fetching">Trying to find out where you are</string>
+
+</resources>
