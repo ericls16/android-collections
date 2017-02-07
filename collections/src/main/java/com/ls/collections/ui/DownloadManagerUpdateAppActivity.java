@@ -12,9 +12,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-
 import com.ls.collections.R;
-import com.ls.collections.databinding.ActivityAppUpdateByDownloadmanagerBinding;
+import com.ls.collections.databinding.ActivityDownloadmanagerUpdateAppBinding;
 import com.ls.collections.features.downloadmanager_update_app.DownLoadApk;
 
 import java.util.List;
@@ -25,16 +24,16 @@ import java.util.List;
  * Created by liu song on 2017/2/4.
  */
 
-public class AppUpdateByDownloadManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class DownloadManagerUpdateAppActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivityAppUpdateByDownloadmanagerBinding mBinding;
+    private ActivityDownloadmanagerUpdateAppBinding mBinding;
     private AlertDialog.Builder mDialog;
     private static final String apkurl = "http://www.lewei.online/sources/xxx.apk";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_app_update_by_downloadmanager);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_downloadmanager_update_app);
     }
 
 
@@ -72,7 +71,7 @@ public class AppUpdateByDownloadManagerActivity extends AppCompatActivity implem
                     showDownloadSetting();
                     return;
                 }
-                DownLoadApk.download(AppUpdateByDownloadManagerActivity.this, downUrl, updateinfo, appName);
+                DownLoadApk.download(DownloadManagerUpdateAppActivity.this, downUrl, updateinfo, appName);
             }
         }).setCancelable(false).create().show();
     }
@@ -96,7 +95,7 @@ public class AppUpdateByDownloadManagerActivity extends AppCompatActivity implem
                     showDownloadSetting();
                     return;
                 }
-                DownLoadApk.download(AppUpdateByDownloadManagerActivity.this,downUrl,updateinfo,appName);
+                DownLoadApk.download(DownloadManagerUpdateAppActivity.this, downUrl, updateinfo, appName);
             }
         }).setNegativeButton("暂不更新", new DialogInterface.OnClickListener() {
             @Override
@@ -146,6 +145,7 @@ public class AppUpdateByDownloadManagerActivity extends AppCompatActivity implem
 
     /**
      * 判断该下载管理组件是否可用
+     *
      * @return
      */
     private boolean canDownloadState() {

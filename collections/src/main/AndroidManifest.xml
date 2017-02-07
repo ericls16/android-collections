@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AppUpdateByDownloadManagerActivity">
+        <activity android:name=".ui.DownloadManagerUpdateAppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,7 +20,7 @@
 
         <!--app更新-->
 
-        <!--<activity android:name=".ui.AppUpdateByDownloadManagerActivity"/>-->
+        <!--<activity android:name=".ui.DownloadManagerUpdateAppActivity"/>-->
 
         <receiver android:name=".features.downloadmanager_update_app.ApkInstallReceiver">
             <intent-filter>
