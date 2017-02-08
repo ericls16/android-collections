@@ -276,7 +276,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
             public void run() {
                 notificationManager.notify(4, builder.build());
             }
-        }, 2000);
+        }, 5000);
     }
 
     /**
