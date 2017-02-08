@@ -7,15 +7,23 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btn_general"
+            android:id="@+id/btn_general_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:onClick="onClick"
-            android:text="一般用法"/>
+            android:text="发送通知"/>
 
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/btn_update_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:onClick="onClick"
+            android:text="更新上一条通知"/>
+
+        <Button
+            android:id="@+id/btn_cancel_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
