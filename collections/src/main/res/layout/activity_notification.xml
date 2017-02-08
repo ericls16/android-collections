@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:onClick="onClick"
-            android:text="发送通知"/>
+            android:text="发送一般通知"/>
 
         <Button
             android:id="@+id/btn_update_notification"
@@ -28,7 +28,31 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:onClick="onClick"
-            android:text="cancel"/>
+            android:text="cancel(去除通知)"/>
+
+        <Button
+            android:id="@+id/btn_flag_auto_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:onClick="onClick"
+            android:text="设置Flag,可被手动清除"/>
+
+        <Button
+            android:id="@+id/btn_flag_no_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:onClick="onClick"
+            android:text="设置Flag,不可被手动清除,必须用cancel"/>
+
+        <Button
+            android:id="@+id/btn_flag_on_going"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:onClick="onClick"
+            android:text="设置Flag,标识正在运行,不能手动清除,必须用cancel"/>
 
     </LinearLayout>
 </layout>
