@@ -50,7 +50,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 cancelNotification();
                 break;
         }
-
     }
 
     /**

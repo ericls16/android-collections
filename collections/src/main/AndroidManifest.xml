@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
 
+        <!--<activity android:name=".ui.WebViewActivity"/>-->
+
         <!--test-->
         <activity android:name=".ui.test.TestActivity"/>
 
