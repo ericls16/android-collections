@@ -1,74 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_general_notification"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="发送一般通知"/>
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
-        <Button
-            android:id="@+id/btn_update_notification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="更新上一条通知"/>
+            <Button
+                android:id="@+id/btn_general_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="发送一般通知" />
 
-        <Button
-            android:id="@+id/btn_cancel_notification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="cancel(去除一条通知)"/>
+            <Button
+                android:id="@+id/btn_update_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="更新上一条通知" />
 
-        <Button
-            android:id="@+id/btn_cancel_all_notification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="cancelAll(去除所有通知)"/>
+            <Button
+                android:id="@+id/btn_cancel_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="cancel(去除一条通知)" />
 
-        <Button
-            android:id="@+id/btn_flag_auto_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="设置Flag,可被手动清除"/>
+            <Button
+                android:id="@+id/btn_cancel_all_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="cancelAll(去除所有通知)" />
 
-        <Button
-            android:id="@+id/btn_flag_no_clear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="设置Flag,不可被手动清除,必须用cancel"/>
+            <Button
+                android:id="@+id/btn_flag_auto_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="设置Flag,可被手动清除" />
 
-        <Button
-            android:id="@+id/btn_flag_on_going"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="设置Flag,标识正在运行,不能手动清除,必须用cancel"/>
+            <Button
+                android:id="@+id/btn_flag_no_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="设置Flag,不可被手动清除,必须用cancel" />
 
-        <Button
-            android:id="@+id/btn_effect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:onClick="onClick"
-            android:text="设置通知效果"/>
+            <Button
+                android:id="@+id/btn_flag_on_going"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="设置Flag,标识正在运行,不能手动清除,必须用cancel" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_effect_ring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="通知带铃声" />
+
+            <Button
+                android:id="@+id/btn_effect_vibrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="通知带震动" />
+
+            <Button
+                android:id="@+id/btn_effect_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="通知带呼吸灯效果，没有效果？" />
+
+            <Button
+                android:id="@+id/btn_effect_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="默认通知效果：铃声、震动、呼吸灯" />
+
+            <Button
+                android:id="@+id/btn_effect_default_insistent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="带默认效果死循环通知,用cancelAll来取消" />
+
+            <Button
+                android:id="@+id/btn_effect_default_only"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:text="带默认效果通知,在用户查看前只能执行一次" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

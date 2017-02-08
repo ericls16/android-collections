@@ -11,7 +11,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -66,8 +65,23 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_flag_on_going:
                 sendFlagOngoingEventNotification();
                 break;
-            case R.id.btn_effect:
+            case R.id.btn_effect_ring:
                 showNotifyWithRing();
+                break;
+            case R.id.btn_effect_vibrate:
+                showNotifyWithVibrate();
+                break;
+            case R.id.btn_effect_light:
+                showNotifyWithLights();
+                break;
+            case R.id.btn_effect_default:
+                showNotifyWithDefault();
+                break;
+            case R.id.btn_effect_default_insistent:
+                showInsistentNotify();
+                break;
+            case R.id.btn_effect_default_only:
+                showAlertOnceNotify();
                 break;
         }
     }
@@ -262,14 +276,14 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
             public void run() {
                 notificationManager.notify(4, builder.build());
             }
-        }, 10000);
+        }, 2000);
     }
 
     /**
      * 显示带有默认铃声、震动、呼吸灯效果的通知
      * 如需实现自定义效果,请参考前面三个例子
      */
-    private void showNotifyWithMixed() {
+    private void showNotifyWithDefault() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("我是有铃声+震动+呼吸灯效果的通知")
@@ -295,7 +309,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     }
 
     /**
-     * 通知只执行一次,与默认的效果一样
+     * 通知只执行一次,除非取消,与默认的效果一样
      */
     private void showAlertOnceNotify() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
