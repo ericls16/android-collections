@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import com.ls.rxjava.R;
 import com.ls.rxjava.databinding.ActivityBasicImplementBinding;
-import com.ls.rxjava.databinding.ActivityTestBinding;
-
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;

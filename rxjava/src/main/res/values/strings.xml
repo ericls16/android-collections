@@ -1,3 +1,5 @@
 <resources>
+    <!--page name-->
     <string name="app_name">RxJava</string>
+    <string name="basic_implement">1. 基本实现</string>
 </resources>
