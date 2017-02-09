@@ -161,6 +161,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
      * @describe 创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起来，整条链子就可以工作了.
      */
     private void subscribe() {
+        showLogPrintMsg();
+
         Observer<String> observer=new Observer<String>() {
             @Override
             public void onCompleted() {
@@ -215,6 +217,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
      * @describe 除了subscribe(Observer)和subscribe(Subscriber)，subscribe()还支持不完整定义的回调，RxJava会自动根据定义创建出Subscriber.
      */
     private void incompleteDefinitionCall(){
+        showLogPrintMsg();
+
         Action1<String> onNextAction = new Action1<String>() {
             // onNext()
             @Override
