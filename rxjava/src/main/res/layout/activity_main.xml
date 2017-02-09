@@ -12,10 +12,10 @@
             android:padding="8dp">
 
             <Button
-                android:id="@+id/btn_test"
+                android:id="@+id/btn_basic_implement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="test"
+                android:text="1. 基本实现"
                 android:onClick="onClick"
                 android:textAllCaps="false" />
         </LinearLayout>

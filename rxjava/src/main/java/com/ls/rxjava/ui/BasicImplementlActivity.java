@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ls.rxjava.R;
+import com.ls.rxjava.databinding.ActivityBasicImplementBinding;
 import com.ls.rxjava.databinding.ActivityTestBinding;
 
 import rx.Observable;
@@ -36,14 +37,14 @@ import rx.functions.Action1;
  * Created by liusong on 2017/1/31.
  */
 
-public class TestActivity extends AppCompatActivity implements View.OnClickListener {
+public class BasicImplementlActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivityTestBinding mBinding;
+    private ActivityBasicImplementBinding mBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_basic_implement);
     }
 
     @Override
