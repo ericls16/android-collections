@@ -20,7 +20,19 @@ import rx.functions.Action1;
 /**
  * RxJava基本用法
  *
- * 注：Observer和Subscriber都是观察者，而且Observer在subscribe()过程中最终会被转换成Subscriber对象，因此，Subscriber来代替Observer更加严谨。
+ * 知识点包括：
+ * 1> 创建Observer观察者;
+ * 2> 创建Subscriber观察者;
+ * 3> 创建Subscriber被观察者;
+ * 4> 快捷创建被观察者事件队列的just和from方式;
+ * 5> 观察者订阅被观察者，两者联系起来;
+ * 6> Subscriber不完整定义回调;
+ *
+ * 备注：
+ * 1> 创建了Observable和Observer之后，再用 subscribe() 方法将它们联结起来，整条链子就可以工作了.
+ * 2> 除了subscribe(Observer)和subscribe(Subscriber)，subscribe()还支持观察者的不完整定义的回调，RxJava会自动根据定义创建出Subscriber.
+ * 3> Observer和Subscriber都是观察者，而且Observer在subscribe()过程中最终会被转换成Subscriber对象，因此，Subscriber来代替Observer更加严谨.
+ *
  * Created by liusong on 2017/1/31.
  */
 
