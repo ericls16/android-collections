@@ -34,6 +34,12 @@ import rx.functions.Action1;
  * 2> 除了subscribe(Observer)和subscribe(Subscriber)，subscribe()还支持观察者的不完整定义的回调，RxJava会自动根据定义创建出Subscriber.
  * 3> Observer和Subscriber都是观察者，而且Observer在subscribe()过程中最终会被转换成Subscriber对象，因此，Subscriber来代替Observer更加严谨.
  * <p>
+ *
+ * 总结：
+ * 在RxJava的默认规则中，事件的发出和消费都是在同一个线程的。
+ * 也就是说，如果只用上面的方法，实现出来的只是一个同步的观察者模式。
+ * 观察者模式本身的目的就是『后台处理，前台回调』的异步机制，因此异步对于 RxJava 是至关重要的。
+ * 而要实现异步，则需要用到 RxJava 的另一个概念： Scheduler。
  * Created by liusong on 2017/1/31.
  */
 
