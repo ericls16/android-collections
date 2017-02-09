@@ -19,7 +19,9 @@ import rx.functions.Action1;
 
 /**
  * RxJava基本用法
- * Created by ls on 2017/1/31.
+ *
+ * 注：Observer和Subscriber都是观察者，而且Observer在subscribe()过程中最终会被转换成Subscriber对象，因此，Subscriber来代替Observer更加严谨。
+ * Created by liusong on 2017/1/31.
  */
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
