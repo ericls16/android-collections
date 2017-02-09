@@ -22,6 +22,12 @@
             android:label="@string/basic_implement"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|screenSize|orientation" />
+
+        <activity
+            android:name=".ui.SchedulerActivity"
+            android:label="@string/scheduler"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|screenSize|orientation" />
     </application>
 
 </manifest>

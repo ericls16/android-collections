@@ -22,8 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_basic_implement:
+            case R.id.btn_basic_implement: //1.基本实现
                 startActivity(new Intent(this, BasicImplementlActivity.class));
+                break;
+            case R.id.btn_scheduler: //1.基本实现
+                startActivity(new Intent(this, SchedulerActivity.class));
                 break;
         }
     }
