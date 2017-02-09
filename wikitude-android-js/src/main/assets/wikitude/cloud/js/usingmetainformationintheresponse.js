@@ -13,14 +13,14 @@ var World = {
     		offsetX: 0.35,
     		offsetY: 0.45,
     		opacity: 0.0,
-    		carScale: 0.045,
+    		carScale: 0.06,
     		carTranslateY: 0.05
     	},
     	snapped: {
     		offsetX: 0.45,
     		offsetY: 0.45,
     		opacity: 0.2,
-    		carScale: 0.08,
+    		carScale: 0.06,
     		carTranslateY: 0
     	}
     },
@@ -33,13 +33,12 @@ var World = {
     defaultScale: 0,
 
 	init: function initFn() {
-	    AR.context.setCloudRecognitionServerRegion(AR.CONST.CLOUD_RECOGNITION_SERVER_REGION.CHINA);
-	    //kuanchuang
-	    /*AR.context.setCloudRecognitionServerRegion(AR.CONST.CLOUD_RECOGNITION_SERVER_REGION.CHINA,{
+//	    AR.context.setCloudRecognitionServerRegion(AR.CONST.CLOUD_RECOGNITION_SERVER_REGION.CHINA);
+	    AR.context.setCloudRecognitionServerRegion(AR.CONST.CLOUD_RECOGNITION_SERVER_REGION.CHINA,{
             "serverUrl": "https://api-cn-broadmesse-client.wikitude.com/cloudrecognition",
             "onSuccess": function(msg) {console.info("all good"); },
             "onError": function(msg) {console.info("error occurred"); }
-        });*/
+        });
 		this.createTracker();
 		this.createOverlays();
 	},
@@ -52,15 +51,16 @@ var World = {
 		function trackerError() is called instead.
 	*/
 	createTracker: function createTrackerFn() {
-		World.cloudRecognitionService = new AR.CloudRecognitionService("1eaaa2bcb2a053c161f91af5d22f10ae", "5857a06443ed04964e1ae211", {
+		/*World.cloudRecognitionService = new AR.CloudRecognitionService("1eaaa2bcb2a053c161f91af5d22f10ae", "5857a06443ed04964e1ae211", {
 			onInitialized: this.trackerLoaded,
 			onError: this.trackerError
-		});
-        //kuanchuang
-		/*World.cloudRecognitionService = new AR.CloudRecognitionService("6a92be07ae8ea695992ab6d38a578b32", "5886b9503110e5ec7dd53e5a", {
+		});*/
+
+        //宽创
+		World.cloudRecognitionService = new AR.CloudRecognitionService("6a92be07ae8ea695992ab6d38a578b32", "589bfabf461792f27d3bcb99", {
         	onInitialized: this.trackerLoaded,
         	onError: this.trackerError
-        });*/
+        });
 
 		World.tracker = new AR.ImageTracker(this.cloudRecognitionService, {
 			onError: this.trackerError
@@ -103,9 +103,9 @@ var World = {
                 onLoaded: World.loadingStep,
                 onClick: World.toggleAnimateModel,
                 scale: {
-                    x: 0,
-                    y: 0,
-                    z: 0
+                    x: response.metadata.scale.x,
+                    y: response.metadata.scale.y,
+                    z: response.metadata.scale.z
                 },
                 translate: {
                     x: 0.0,
@@ -156,9 +156,13 @@ var World = {
 
             //---------------------------------
 //            World.appearingAnimation = World.createAppearingAnimation(World.model3D, 0.12);
-            World.appearingAnimation = World.createAppearingAnimation(World.model3D, 0.06);
+            World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.modelscale);
             World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
             //---------------------------
+
+            if (World.buttonRotate !== undefined) {
+            	World.buttonRotate.destroy();
+            }
 
             var imgRotate = new AR.ImageResource("assets/rotateButton.png");
             World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.14, {
@@ -166,6 +170,10 @@ var World = {
             	offsetY: 0.30,
             	onClick: World.toggleAnimateModel
             });
+
+            if (World.buttonSnap !== undefined) {
+            	World.buttonSnap.destroy();
+            }
 
             var imgSnap = new AR.ImageResource("assets/snapButton.png");
             World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.14, {
@@ -198,7 +206,7 @@ var World = {
 			//---------------------------
 
 		}else{
-		    alert("recognize failed!");
+//		    alert("failed");
 		}
 	},
 
@@ -372,7 +380,7 @@ var World = {
 
 	trackerLoaded: function trackerLoadedFn() {
 		World.startContinuousRecognition(1000);
-		World.showUserInstructions();
+//		World.showUserInstructions();
 //		World.resourcesLoaded=true;
 	},
 

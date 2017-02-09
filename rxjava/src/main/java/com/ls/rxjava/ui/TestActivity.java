@@ -68,6 +68,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
+     * toast提示：查看log信息
+     */
+    private void showLogPrintMsg(){
+        Toast.makeText(this, "查看log打印的信息！", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
      * 创建Observer观察者
      */
     private void createObserver() {
