@@ -379,7 +379,7 @@ var World = {
 	},
 
 	trackerLoaded: function trackerLoadedFn() {
-		World.startContinuousRecognition(1000);
+		World.startContinuousRecognition(2000);
 //		World.showUserInstructions();
 //		World.resourcesLoaded=true;
 	},
