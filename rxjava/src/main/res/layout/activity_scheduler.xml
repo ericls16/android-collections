@@ -5,5 +5,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_observerOn_subscribeOn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="observerOn和subscribeOn方法"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_observerOn_subscribeOn_show_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="observerOn和subscribeOn应用于id取得图片并显示的案例"
+            android:textAllCaps="false" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/placeholder"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
 </layout>
