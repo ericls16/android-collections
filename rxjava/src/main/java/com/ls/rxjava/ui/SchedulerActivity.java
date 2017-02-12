@@ -43,14 +43,14 @@ import rx.schedulers.Schedulers;
  * 1> subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
  * 2> observeOn(): 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。
  * -----------------------------------------------------------------
- * 变换:
- * RxJava 提供了对事件序列进行变换的支持，这是它的核心功能之一，也是大多数人说『RxJava 真是太好用了』的最大原因。
- * 所谓变换，就是将事件序列中的对象或整个序列进行"加工处理"，转换成不同的事件或事件序列。
- * 1> Func1类：它和 Action1 非常相似，也是 RxJava 的一个接口，用于包装含有一个参数的方法。
+ * Func1类：它和 Action1 非常相似，也是 RxJava 的一个接口，用于包装含有一个参数的方法。
  *    Func1 和 Action 的区别在于， Func1 包装的是有返回值的方法。
  *    另外，和 ActionX 一样， FuncX 也有多个，用于不同参数个数的方法。
- * 2> map() 方法将参数中的 String 对象转换成一个 Bitmap 对象后返回，而在经过 map() 方法后，事件的参数类型也由 String 转为了 Bitmap。
- *    这种直接变换对象并返回的，是最常见的也最容易理解的变换。不过 RxJava 的变换远不止这样，它不仅可以针对事件对象，还可以针对整个事件队列，这使得 RxJava 变得非常灵活。
+ * -----------------------------------------------------------------
+ * 变换:
+ * 1> map: 对事件进行加工转换，map是一对一转化。
+ * 2> flatmap: 通过一组新创建的 Observable 将初始的对象『铺平』之后通过统一路径分发了下去。一对多的转化。
+ * -----------------------------------------------------------------
  *
  * Created by liu song on 2017/2/9.
  */
@@ -84,6 +84,9 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn_flatmap_prelude_print_student_course:
                 printCourseOfStudentBeforeUseFlatMap();
+                break;
+            case R.id.btn_flatmap_print_student_course:
+                printCourseOfStudentUseFlatMap();
                 break;
             default:
                 break;
@@ -152,10 +155,16 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
     }
 
     //-----------------------------------------------
-    /** 变换 **/
+    /**
+     * 变换
+     * RxJava 提供了对事件序列进行变换的支持，这是它的核心功能之一，也是大多数人说『RxJava 真是太好用了』的最大原因。
+     * 所谓变换，就是将事件序列中的对象或整个序列进行"加工处理"，转换成不同的事件或事件序列。
+     */
 
     /**
      * map()变换案例
+     * 1> map() 方法将参数中的 String 对象转换成一个 Bitmap 对象后返回，而在经过 map() 方法后，事件的参数类型也由 String 转为了 Bitmap。
+     * 这种直接变换对象并返回的，是最常见的也最容易理解的变换。不过 RxJava 的变换远不止这样，它不仅可以针对事件对象，还可以针对整个事件队列，这使得 RxJava 变得非常灵活。
      */
     private void transformWithMap(){
         Toast.makeText(this, "结果请查看log打印", Toast.LENGTH_SHORT).show();
@@ -218,7 +227,7 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
     }
 
     /**
-     * 打印每个学生的所有课程1
+     * 打印每个学生的所有课程，这里是用了循环的方式打印
      */
     private void printCourseOfStudentBeforeUseFlatMap(){
         List<String> xiaoming=new ArrayList<>();
@@ -254,6 +263,47 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                 });
+    }
+
+    /**
+     * 打印每个学生的所有课程
+     */
+    private void printCourseOfStudentUseFlatMap(){
+        List<String> xiaoming=new ArrayList<>();
+        xiaoming.add("语文");
+        xiaoming.add("数学");
+
+        List<String> zhangsan=new ArrayList<>();
+        zhangsan.add("语文");
+        zhangsan.add("英语");
+
+
+        Student[] students={new Student("小明",xiaoming),new Student("张三",zhangsan)};
+        Observable.from(students)
+            .flatMap(new Func1<Student, Observable<String>>() {
+                @Override
+                public Observable<String> call(Student student) {
+                    Log.i(tag,student.getName()+"课程:");
+                    //返回的Observable对象带有的是单个学生的课程数组事件队列
+                    return Observable.from(student.getCourses());
+                }
+            })
+            .subscribe(new Subscriber<String>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(String s) {
+                    Log.i(tag,s);
+                }
+            });
     }
 }
 
