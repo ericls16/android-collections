@@ -76,6 +76,13 @@ import rx.schedulers.Schedulers;
  * -----------------------------------------------------------------
  * compose: 对 Observable 整体的变换， 是针对 Observable 自身进行变换。
  * -----------------------------------------------------------------
+ * doOnSubscribe()的后面跟一个 subscribeOn() ，就能指定准备工作的线程了
+ *
+ *  Observable.doOnSubscribe() 。
+ *  它和 Subscriber.onStart() 同样是在 subscribe() 调用后而且在事件发送前执行，但区别在于它可以指定线程。
+ *  默认情况下， doOnSubscribe() 执行在 subscribe() 发生的线程；
+ *  而如果在 doOnSubscribe() 之后有 subscribeOn() 的话，它将执行在离它最近的 subscribeOn() 所指定的线程。
+ * -----------------------------------------------------------------
  *
  * Created by liu song on 2017/2/9.
  */

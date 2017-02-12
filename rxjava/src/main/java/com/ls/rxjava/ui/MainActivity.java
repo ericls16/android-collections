@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_basic_implement: //1.基本实现
                 startActivity(new Intent(this, BasicImplementlActivity.class));
                 break;
-            case R.id.btn_scheduler: //1.基本实现
+            case R.id.btn_scheduler: //2.线程控制
                 startActivity(new Intent(this, SchedulerActivity.class));
                 break;
         }
