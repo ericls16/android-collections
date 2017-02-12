@@ -41,7 +41,12 @@ import rx.schedulers.Schedulers;
  * -----------------------------------------------------------------
  * Observable的subscribeOn() 和 observeOn() 两个方法来对线程进行控制:
  * 1> subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
+ *                   当使用了多个 subscribeOn() 的时候，只有第一个 subscribeOn() 起作用。
  * 2> observeOn(): 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。
+ *                 observeOn() 指定的是它之后的操作所在的线程。因此如果有多次切换线程的需求，只要在每个想要切换线程的位置调用一次 observeOn() 即可。
+ *
+ * 注：subscribeOn() 和 observeOn() 的内部实现，也是用的 lift().
+ *    subscribeOn只有第一次使用时起作用，observeOn可以多次使用，自由切换线程。
  * -----------------------------------------------------------------
  * Func1类：它和 Action1 非常相似，也是 RxJava 的一个接口，用于包装含有一个参数的方法。
  *    Func1 和 Action 的区别在于， Func1 包装的是有返回值的方法。
@@ -63,10 +68,15 @@ import rx.schedulers.Schedulers;
  * 在 Observable 执行了 lift(Operator) 方法之后，会返回一个新的 Observable，
  * 这个新的 Observable 会像一个代理一样，负责接收原始的 Observable 发出的事件，并在处理后发送给 Subscriber。
  *
+ *  lift() 是针对事件项和事件序列的.
+ *
  * xJava 都不建议开发者自定义 Operator 来直接使用 lift()，
  * 而是建议尽量使用已有的 lift() 包装方法（如 map() flatMap() 等）进行组合来实现需求，
  * 因为直接使用 lift() 非常容易发生一些难以发现的错误。
  * -----------------------------------------------------------------
+ * compose: 对 Observable 整体的变换， 是针对 Observable 自身进行变换。
+ * -----------------------------------------------------------------
+ *
  * Created by liu song on 2017/2/9.
  */
 
