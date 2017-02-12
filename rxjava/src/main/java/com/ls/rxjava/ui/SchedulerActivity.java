@@ -49,9 +49,24 @@ import rx.schedulers.Schedulers;
  * -----------------------------------------------------------------
  * 变换:
  * 1> map: 对事件进行加工转换，map是一对一转化。
- * 2> flatmap: 通过一组新创建的 Observable 将初始的对象『铺平』之后通过统一路径分发了下去。一对多的转化。
+ * 2> flatmap: 通过一组新创建的 Observable 将初始的对象『铺平』之后通过统一路径分发了下去。
+ *             常用于一对多的转化、嵌套网络请求。
+ * -----------------------------------------------------------------
+ * throttleFirst(): 在每次事件触发后的一定时间间隔内丢弃新的事件。常用作去抖动过滤，
+ * 例如按钮的点击监听器： RxView.clickEvents(button)
+ * RxBinding 代码，后面的文章有解释 .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms .subscribe(subscriber);
  * -----------------------------------------------------------------
  *
+ *
+ * -----------------------------------------------------------------
+ * RxJava变换的原理：lift()
+ * 在 Observable 执行了 lift(Operator) 方法之后，会返回一个新的 Observable，
+ * 这个新的 Observable 会像一个代理一样，负责接收原始的 Observable 发出的事件，并在处理后发送给 Subscriber。
+ *
+ * xJava 都不建议开发者自定义 Operator 来直接使用 lift()，
+ * 而是建议尽量使用已有的 lift() 包装方法（如 map() flatMap() 等）进行组合来实现需求，
+ * 因为直接使用 lift() 非常容易发生一些难以发现的错误。
+ * -----------------------------------------------------------------
  * Created by liu song on 2017/2/9.
  */
 
@@ -198,6 +213,7 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
      * 利用map打印students数组里Student的名字
      */
     private void printNamesBeforeUseFlatMap(){
+        Toast.makeText(this, "结果请查看log打印", Toast.LENGTH_SHORT).show();
         Student[] students={new Student("小明"),new Student("张三")};
         Observable.from(students)
                 .map(new Func1<Student, String>() {
@@ -230,6 +246,7 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
      * 打印每个学生的所有课程，这里是用了循环的方式打印
      */
     private void printCourseOfStudentBeforeUseFlatMap(){
+        Toast.makeText(this, "结果请查看log打印", Toast.LENGTH_SHORT).show();
         List<String> xiaoming=new ArrayList<>();
         xiaoming.add("语文");
         xiaoming.add("数学");
@@ -237,7 +254,6 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
         List<String> zhangsan=new ArrayList<>();
         zhangsan.add("语文");
         zhangsan.add("英语");
-
 
         Student[] students={new Student("小明",xiaoming),new Student("张三",zhangsan)};
         Observable.from(students)
@@ -269,6 +285,7 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
      * 打印每个学生的所有课程
      */
     private void printCourseOfStudentUseFlatMap(){
+        Toast.makeText(this, "结果请查看log打印", Toast.LENGTH_SHORT).show();
         List<String> xiaoming=new ArrayList<>();
         xiaoming.add("语文");
         xiaoming.add("数学");
@@ -305,6 +322,34 @@ public class SchedulerActivity extends AppCompatActivity implements View.OnClick
                 }
             });
     }
+
+
+    /**
+     * flatMap() 也常用于嵌套的异步操作，例如嵌套的网络请求(可用retrofit+rxjava)
+     * 通过 flatMap() ，可以把嵌套的请求写在一条链中，从而保持程序逻辑的清晰。
+     *
+     */
+    private void nestedNetworkRequestUseFlatMap(){
+        Toast.makeText(this, "请查看嵌套网络请求的示例代码", Toast.LENGTH_SHORT).show();
+//        networkClient.requestToken() // 返回 Observable<String>，在订阅时请求 token，并在响应后发送 token
+//            .flatMap(new Func1<String, Observable<Messages>>() {
+//                @Override
+//                public Observable<Messages> call(String token) {
+//                    // 返回 Observable<Messages>，在订阅时请求消息列表，并在响应后发送请求到的消息列表
+//                    return networkClient.requestCommitToken();
+//                }
+//            })
+//            .subscribe(new Action1<Messages>() {
+//                @Override
+//                public void call(Messages messages) {
+//                    // 处理显示消息列表
+//                    showMessages(messages);
+//                }
+//            });
+    }
+
+
+
 }
 
 
