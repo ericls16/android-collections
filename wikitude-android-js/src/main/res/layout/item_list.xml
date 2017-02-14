@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.ls.js.model.Article" />
+
+        <variable
+            name="item"
+            type="Article" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image"
+            android:padding="8dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_vertical"
+            fresco:placeholderImage="@drawable/placeholder"
+            fresco:placeholderImageScaleType="fitXY"
+            fresco:roundAsCircle="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title_bar_color"
+                android:text="@{item.title}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/content_font_color"
+                android:text="@{item.content}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

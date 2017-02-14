@@ -1,0 +1,12 @@
+keystore密码：bmar20161229
+key:
+	alias:kcdemo
+	password: bmar20161229
+	vic
+	vic
+	vic
+	上海
+	上海
+	cn
+
+master password：android
