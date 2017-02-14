@@ -2,9 +2,6 @@ package com.ls.js;
 
 import android.app.Application;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.stetho.Stetho;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -21,15 +18,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Stetho.initializeWithDefaults(this);
-
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setDownsampleEnabled(true)
-                .build();
-        Fresco.initialize(this, config);
-
         initUMConfig();
-
     }
 
     private void initUMConfig() {

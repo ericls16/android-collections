@@ -15,11 +15,11 @@ import java.io.InputStreamReader;
  * Created by liu song on 2017/1/18.
  */
 
-public class TestActivity extends AppCompatActivity implements View.OnClickListener {
+public class PingActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_ping);
     }
 
     @Override

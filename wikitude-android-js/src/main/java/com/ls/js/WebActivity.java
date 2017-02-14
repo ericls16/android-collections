@@ -26,7 +26,7 @@ import com.umeng.socialize.shareboard.ShareBoardConfig;
  * Created by liu song on 2017/2/13.
  */
 
-public class WebActivity extends AppCompatActivity implements View.OnClickListener{
+public class WebActivity extends AppCompatActivity implements View.OnClickListener {
 
     private WebView webView;
     private String share_url;
@@ -42,14 +42,14 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
         }
 
         setContentView(R.layout.activity_web);
-        webView= (WebView) findViewById(R.id.web_view);
+        webView = (WebView) findViewById(R.id.web_view);
         webViewConfiguration(webView);
         initData();
     }
 
     private void initData() {
-        String url_type=getIntent().getStringExtra("url_type");
-        if(TextUtils.equals(url_type,"WEB_PAGE_URL")){
+        String url_type = getIntent().getStringExtra("url_type");
+        if (TextUtils.equals(url_type, "WEB_PAGE_URL")) {
             webView.loadUrl(getIntent().getStringExtra("url"));
         }
 
@@ -57,7 +57,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_share:
 //                Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
                 openShareBoard();
@@ -73,7 +73,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
                 .withText("hello")
                 .withTitle("share")
                 .withTargetUrl(share_url)
-                .setDisplayList(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setCallback(umShareListener)
                 .open(config);
     }
@@ -81,7 +81,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Log.d("plat","platform"+platform);
+            Log.d("plat", "platform" + platform);
 
             Toast.makeText(WebActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
 
@@ -89,15 +89,15 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(WebActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-            if(t!=null){
-                Log.d("throw","throw:"+t.getMessage());
+            Toast.makeText(WebActivity.this, platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            if (t != null) {
+                Log.d("throw", "throw:" + t.getMessage());
             }
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(WebActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WebActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -132,7 +132,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onPause() {
-        if(webView!=null) {
+        if (webView != null) {
             webView.onPause();
         }
         super.onPause();
@@ -140,7 +140,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onResume() {
-        if(webView!=null){
+        if (webView != null) {
             webView.onResume();
         }
         super.onResume();
@@ -189,7 +189,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //点击链接继续在当前browser中响应;
-                Log.i("url", ""+url);
+                Log.i("url", "" + url);
                 view.loadUrl(url);
                 return true;
             }
@@ -197,10 +197,10 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                Log.i("url_finish", ""+url);
-                share_url=url;
+                Log.i("url_finish", "" + url);
+                share_url = url;
                 //在页面装入完成后设置加载图片
-                if(!webSettings.getLoadsImagesAutomatically()) {
+                if (!webSettings.getLoadsImagesAutomatically()) {
                     webSettings.setLoadsImagesAutomatically(true);
                 }
             }

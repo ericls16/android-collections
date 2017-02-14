@@ -61,10 +61,10 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
 
                 //跳转webview
                 if ("link".equalsIgnoreCase(invokedUri.getHost())) {
-                    String url=invokedUri.getQueryParameter("uri");
-                    Intent intent=new Intent(WikitudeActivity.this,WebActivity.class);
-                    intent.putExtra("url_type","WEB_PAGE_URL");
-                    intent.putExtra("url",url);
+                    String url = invokedUri.getQueryParameter("uri");
+                    Intent intent = new Intent(WikitudeActivity.this, WebActivity.class);
+                    intent.putExtra("url_type", "WEB_PAGE_URL");
+                    intent.putExtra("url", url);
                     startActivity(intent);
                     return true;
                 }

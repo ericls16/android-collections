@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -39,34 +38,12 @@ android {
     dataBinding {
         enabled = true
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:support-v13:25.1.0'
-    compile 'com.artemzin.rxjava:proguard-rules:1.2.2.0'
-    compile 'com.bigkoo:convenientbanner:2.0.5'
-    compile 'com.commit451:PhotoView:1.2.5'
-    compile 'com.facebook.fresco:fresco:0.14.1'
-    compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
-    compile 'com.google.zxing:core:3.3.0'
-    compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
-    compile 'com.squareup:android-times-square:1.7.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.8.2'
-    compile 'com.trello:rxlifecycle:1.0'
-    compile 'com.trello:rxlifecycle-components:1.0'
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
-    compile 'me.drakeet.library:crashwoodpecker:2.1.1'
-    compile 'org.hybridsquad.android.photocropper:library:3.0.2'
 
     compile(name: 'wikitudesdk', ext: 'aar')
     compile files('src/main/libs/libammsdk.jar')
