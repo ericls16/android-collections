@@ -1,5 +1,6 @@
 package com.ls.js;
 
+import android.content.Intent;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.util.Log;
@@ -57,6 +58,16 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
             public boolean urlWasInvoked(String uriString) {
                 Uri invokedUri = Uri.parse(uriString);
                 Log.i("LOG_CAT", "url=" + invokedUri.toString());
+
+                //跳转webview
+                if ("link".equalsIgnoreCase(invokedUri.getHost())) {
+                    String url=invokedUri.getQueryParameter("uri");
+                    Intent intent=new Intent(WikitudeActivity.this,WebActivity.class);
+                    intent.putExtra("url_type","WEB_PAGE_URL");
+                    intent.putExtra("url",url);
+                    startActivity(intent);
+                    return true;
+                }
 
                 return true;
             }

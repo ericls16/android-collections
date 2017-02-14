@@ -57,7 +57,7 @@ var World = {
 		});*/
 
         //宽创
-		World.cloudRecognitionService = new AR.CloudRecognitionService("6a92be07ae8ea695992ab6d38a578b32", "589bfabf461792f27d3bcb99", {
+		World.cloudRecognitionService = new AR.CloudRecognitionService("6a92be07ae8ea695992ab6d38a578b32", "58a166af461792f27d3bcba8", {
         	onInitialized: this.trackerLoaded,
         	onError: this.trackerError
         });
@@ -93,117 +93,152 @@ var World = {
 	*/
 	onRecognition: function onRecognitionFn(recognized, response) {
 		if (recognized) {
-		    World.resourcesLoaded=true;
+//            alert("su");
+		    if(response.metadata.D_url.length!=0){
+                var div = document.getElementById("snapContainer");
+                div.className = "";
 
-            if (World.model3D !== undefined) {
-            	World.model3D.destroy();
-            }
+		        World.resourcesLoaded=true;
 
-            World.model3D = new AR.Model(response.metadata.D_url, {
-                onLoaded: World.loadingStep,
-                onClick: World.toggleAnimateModel,
-                scale: {
-                    x: response.metadata.scale.x,
-                    y: response.metadata.scale.y,
-                    z: response.metadata.scale.z
-                },
-                translate: {
-                    x: 0.0,
-                    y: 0.05,
-                    z: 0.0
-                },
-                rotate: {
-                    z: 335
-                },
-                onScaleBegan: World.onScaleBegan,
-                onScaleChanged: World.onScaleChanged,
-                onScaleEnded: function(scale) {
-                },
-                onDragBegan: function(x, y) {
-                },
-                onDragChanged: function(x, y) {
-                    if (World.snapped) {
-                        var movement = { x:0, y:0 };
-
-
-                        /* Calculate the touch movement between this event and the last one */
-                        movement.x = World.previousDragValue.x - x;
-                        movement.y = World.previousDragValue.y - y;
-
-                        /* Rotate the car model accordingly to the calculated movement values and the current orientation of the model. */
-                        this.rotate.y += (Math.cos(this.rotate.z * Math.PI / 180) * movement.x * -1 + Math.sin(this.rotate.z * Math.PI / 180) * movement.y) * 180;
-                        this.rotate.x += (Math.cos(this.rotate.z * Math.PI / 180) * movement.y + Math.sin(this.rotate.z * Math.PI / 180) * movement.x) * -180;
-
-                        World.previousDragValue.x = x;
-                        World.previousDragValue.y = y;
-                    }
-                },
-                onDragEnded: function(x, y) {
-                    if (World.snapped) {
-                        World.previousDragValue.x = 0;
-                        World.previousDragValue.y = 0;
-                    }
-                },
-                onRotationBegan: function(angleInDegrees) {
-                },
-                onRotationChanged: function(angleInDegrees) {
-                   this.rotate.z = previousRotationValue - angleInDegrees;
-                },
-                onRotationEnded: function(angleInDegrees) {
-                   previousRotationValue = this.rotate.z
+                if (World.model3D !== undefined) {
+                	World.model3D.destroy();
                 }
-            });
 
-            //---------------------------------
-//            World.appearingAnimation = World.createAppearingAnimation(World.model3D, 0.12);
-            World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.modelscale);
-            World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
-            //---------------------------
+                World.model3D = new AR.Model(response.metadata.D_url, {
+                    onLoaded: World.loadingStep,
+                    onClick: World.toggleAnimateModel,
+                    scale: {
+                        x: response.metadata.scale.x,
+                        y: response.metadata.scale.y,
+                        z: response.metadata.scale.z
+                    },
+                    translate: {
+                    	x: response.metadata.translate.x,
+                    	y: response.metadata.translate.y,
+                    	z: response.metadata.translate.z
+                    },
+                    rotate: {
+                        yaw: response.metadata.rotate.yaw,
+                    	roll: response.metadata.rotate.roll,
+                    	tilt: response.metadata.rotate.tilt
+                    },
+                    onScaleBegan: World.onScaleBegan,
+                    onScaleChanged: World.onScaleChanged,
+                    onScaleEnded: function(scale) {
+                    },
+                    onDragBegan: function(x, y) {
+                    },
+                    onDragChanged: function(x, y) {
+                        if (World.snapped) {
+                            var movement = { x:0, y:0 };
 
-            if (World.buttonRotate !== undefined) {
-            	World.buttonRotate.destroy();
-            }
+                            movement.x = World.previousDragValue.x - x;
+                            movement.y = World.previousDragValue.y - y;
 
-            var imgRotate = new AR.ImageResource("assets/rotateButton.png");
-            World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.14, {
-            	offsetX: 0.20,
-            	offsetY: 0.30,
-            	onClick: World.toggleAnimateModel
-            });
+                            this.rotate.y += (Math.cos(this.rotate.z * Math.PI / 180) * movement.x * -1 + Math.sin(this.rotate.z * Math.PI / 180) * movement.y) * 180;
+                            this.rotate.x += (Math.cos(this.rotate.z * Math.PI / 180) * movement.y + Math.sin(this.rotate.z * Math.PI / 180) * movement.x) * -180;
 
-            if (World.buttonSnap !== undefined) {
-            	World.buttonSnap.destroy();
-            }
+                            World.previousDragValue.x = x;
+                            World.previousDragValue.y = y;
+                        }
+                    },
+                    onDragEnded: function(x, y) {
+                        if (World.snapped) {
+                            World.previousDragValue.x = 0;
+                            World.previousDragValue.y = 0;
+                        }
+                    },
+                    onRotationBegan: function(angleInDegrees) {
+                    },
+                    onRotationChanged: function(angleInDegrees) {
+                       this.rotate.z = previousRotationValue - angleInDegrees;
+                    },
+                    onRotationEnded: function(angleInDegrees) {
+                       previousRotationValue = this.rotate.z
+                    }
+                });
 
-            var imgSnap = new AR.ImageResource("assets/snapButton.png");
-            World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.14, {
-                offsetX: -0.20,
-                offsetY: -0.30,
-                onClick: World.toggleSnapping
-            });
+                //---------------------------------
+                World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.modelscale);
+                World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
+                //---------------------------
 
-			if (World.modelArguments !== undefined) {
-				World.modelArguments.destroy();
-			}
+                if (World.buttonRotate !== undefined) {
+                	World.buttonRotate.destroy();
+                }
 
-			/*
-				The following combines everything by creating an AR.ImageTrackable using the CloudRecognitionService, the name of the image target and
-				the drawables that should augment the recognized image.
-			*/	
-			World.modelArguments = new AR.ImageTrackable(World.tracker, response.targetInfo.name , {
-				drawables: {
-					cam: [World.model3D,World.buttonSnap,World.buttonRotate]
-				},
-                snapToScreen: {
-                	snapContainer: document.getElementById('snapContainer')
-                },
-                onEnterFieldOfVision: World.appear,
-                onExitFieldOfVision: World.disappear
-			});
+                var imgRotate = new AR.ImageResource("assets/rotateButton.png");
+                World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.14, {
+                	offsetX: 0.20,
+                	offsetY: 0.30,
+                	onClick: World.toggleAnimateModel
+                });
 
-//			World.toggleAnimateModel();
+                if (World.buttonSnap !== undefined) {
+                	World.buttonSnap.destroy();
+                }
 
-			//---------------------------
+                var imgSnap = new AR.ImageResource("assets/snapButton.png");
+                World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.14, {
+                    offsetX: -0.20,
+                    offsetY: -0.30,
+                    onClick: World.toggleSnapping
+                });
+                //-----------------------------
+                var imgButton = new AR.ImageResource(response.metadata.picture_url);
+                var buttonOverlay = new AR.ImageDrawable(imgButton, 0.15, {
+                	translate: {
+                		x: 0,
+                		y: -0.4
+                	}
+                });
+
+                buttonOverlay.onClick = function() {
+                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url);
+                     document.location = wvUrl;
+                };
+                //-----------------------------
+                if (World.modelArguments !== undefined) {
+                	World.modelArguments.destroy();
+                }
+
+                World.modelArguments = new AR.ImageTrackable(World.tracker, response.targetInfo.name , {
+                	drawables: {
+                		cam: [buttonOverlay,World.model3D,World.buttonSnap,World.buttonRotate]
+                	},
+                    snapToScreen: {
+                    	snapContainer: document.getElementById('snapContainer')
+                    },
+                    onEnterFieldOfVision: World.appear,
+                    onExitFieldOfVision: World.disappear
+                });
+		    }else{
+                var div = document.getElementById("snapContainer");
+                div.className = "selected";
+
+                var imgButton = new AR.ImageResource(response.metadata.picture_url);
+                var buttonOverlay = new AR.ImageDrawable(imgButton, 0.15, {
+                	translate: {
+                		x: 0,
+                		y: 0.15
+                	}
+                });
+
+                buttonOverlay.onClick = function() {
+                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url);
+                     document.location = wvUrl;
+                };
+
+                if (World.modelArguments !== undefined) {
+                	World.modelArguments.destroy();
+                }
+
+                World.modelArguments = new AR.ImageTrackable(World.tracker, response.targetInfo.name , {
+                	drawables: {
+                		cam: [buttonOverlay]
+                	}
+                });
+		    }
 
 		}else{
 //		    alert("failed");
@@ -233,11 +268,6 @@ var World = {
     },
 
     createAppearingAnimation: function createAppearingAnimationFn(model, scale) {
-		/*
-			The animation scales up the 3D model once the target is inside the field of vision. Creating an animation on a single property of an object is done using an AR.PropertyAnimation. Since the car model needs to be scaled up on all three axis, three animations are needed. These animations are grouped together utilizing an AR.AnimationGroup that allows them to play them in parallel.
-
-			Each AR.PropertyAnimation targets one of the three axis and scales the model from 0 to the value passed in the scale variable. An easing curve is used to create a more dynamic effect of the animation.
-		*/
 		var sx = new AR.PropertyAnimation(model, "scale.x", 0, scale, 1500, {
 			type: AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC
 		});
@@ -274,7 +304,6 @@ var World = {
     },
 
 	toggleSnapping: function toggleSnappingFn() {
-        /*AR.context.openInBrowser("https://www.baidu.com/");*/
 		if (World.appearingAnimation.isRunning()) {
 			World.appearingAnimation.stop();
 		}
@@ -363,16 +392,10 @@ var World = {
     	return false;
     },
 
-    //----------------------------------------------
-
 	onRecognitionError: function onRecognitionError(errorCode, errorMessage) {
 		alert("error code: " + errorCode + " error message: " + JSON.stringify(errorMessage));
 	},
 
-	/*
-		In case the current network the user is connected to, isn't fast enough for the set interval. The server calls this callback function with
-		a new suggested interval. To set the new interval the recognition mode first will be restarted.
-	*/
 	onInterruption: function onInterruptionFn(suggestedInterval) {
 		World.cloudRecognitionService.stopContinuousRecognition();
 		World.cloudRecognitionService.startContinuousRecognition(suggestedInterval);
@@ -380,29 +403,6 @@ var World = {
 
 	trackerLoaded: function trackerLoadedFn() {
 		World.startContinuousRecognition(2000);
-//		World.showUserInstructions();
-//		World.resourcesLoaded=true;
-	},
-
-	showUserInstructions: function showUserInstructionsFn() {
-		var cssDivLeft = " style='display: table-cell;vertical-align: middle; text-align: right; width: 20%; padding-right: 15px;'";
-		var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: center;'";
-		var img = "style='margin-right:5px'";
-
-		document.getElementById('messageBox').innerHTML =
-			"<div" + cssDivLeft + ">Scan: </div>" +
-			"<div" + cssDivRight + ">" +
-				"<img " + img + " src='assets/austria.jpg'></img>" +
-				"<img " + img + " src='assets/brazil.jpg'></img>" +
-				"<img " + img + " src='assets/france.jpg'></img>" +
-				"<img " + img + " src='assets/germany.jpg'></img>" +
-				"<img " + img + " src='assets/italy.jpg'></img>" +
-			"</div>";
-
-		setTimeout(function() {
-			var e = document.getElementById('messageBox');
-			e.parentElement.removeChild(e);
-		}, 10000);			
 	}
 
 };

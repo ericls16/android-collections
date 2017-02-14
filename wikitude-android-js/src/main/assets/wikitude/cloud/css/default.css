@@ -23,9 +23,16 @@
 	opacity: .0;
 }
 
+/*display: block;*/
 #snapContainer:before {
 	content:"";
-	display: block;
+    display: block;
+	padding-top: 100%;
+}
+
+#snapContainer.selected:before {
+	content:"";
+    display: inline;
 	padding-top: 100%;
 }
 
