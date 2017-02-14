@@ -59,8 +59,10 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_share:
-//                Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
                 openShareBoard();
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

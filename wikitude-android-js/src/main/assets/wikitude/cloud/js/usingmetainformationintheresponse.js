@@ -118,9 +118,9 @@ var World = {
                     	z: response.metadata.translate.z
                     },
                     rotate: {
-                        yaw: response.metadata.rotate.yaw,
-                    	roll: response.metadata.rotate.roll,
-                    	tilt: response.metadata.rotate.tilt
+                        y: response.metadata.rotate.yaw,
+                        z: response.metadata.rotate.roll,
+                        x: response.metadata.rotate.tilt
                     },
                     onScaleBegan: World.onScaleBegan,
                     onScaleChanged: World.onScaleChanged,
@@ -298,9 +298,9 @@ var World = {
     resetModel: function resetModelFn() {
     	World.rotationAnimation.stop();
     	World.rotating = false;
-    	World.model3D.rotate.x = 0;
-    	World.model3D.rotate.y = 0;
-    	World.model3D.rotate.z = 335;
+//    	World.model3D.rotate.x = 0;
+//    	World.model3D.rotate.y = 0;
+//    	World.model3D.rotate.z = 335;
     },
 
 	toggleSnapping: function toggleSnappingFn() {
