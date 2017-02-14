@@ -119,8 +119,8 @@ var World = {
                     },
                     rotate: {
                         y: response.metadata.rotate.yaw,
-                        z: response.metadata.rotate.roll,
-                        x: response.metadata.rotate.tilt
+                    	z: response.metadata.rotate.roll,
+                    	x: response.metadata.rotate.tilt
                     },
                     onScaleBegan: World.onScaleBegan,
                     onScaleChanged: World.onScaleChanged,
