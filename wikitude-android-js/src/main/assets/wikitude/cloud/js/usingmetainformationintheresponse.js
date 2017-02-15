@@ -10,17 +10,17 @@ var World = {
     interactionContainer: 'snapContainer',
     layout: {
     	normal: {
-    		offsetX: 0.35,
-    		offsetY: 0.45,
+    		offsetX: 0.45,
+    		offsetY: 0.55,
     		opacity: 0.0,
-    		carScale: 0.06,
-    		carTranslateY: 0.05
+    		carScale: 0.2,
+    		carTranslateY: 0
     	},
     	snapped: {
     		offsetX: 0.45,
-    		offsetY: 0.45,
+    		offsetY: 0.55,
     		opacity: 0.2,
-    		carScale: 0.06,
+    		carScale: 0.2,
     		carTranslateY: 0
     	}
     },
@@ -168,7 +168,7 @@ var World = {
                 }
 
                 var imgRotate = new AR.ImageResource("assets/rotateButton.png");
-                World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.14, {
+                World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.2, {
                 	offsetX: 0.20,
                 	offsetY: 0.30,
                 	onClick: World.toggleAnimateModel
@@ -179,7 +179,7 @@ var World = {
                 }
 
                 var imgSnap = new AR.ImageResource("assets/snapButton.png");
-                World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.14, {
+                World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.2, {
                     offsetX: -0.20,
                     offsetY: -0.30,
                     onClick: World.toggleSnapping
@@ -189,12 +189,12 @@ var World = {
                 var buttonOverlay = new AR.ImageDrawable(imgButton, 0.15, {
                 	translate: {
                 		x: 0,
-                		y: -0.4
+                		y: -0.8
                 	}
                 });
 
                 buttonOverlay.onClick = function() {
-                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url);
+                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
                      document.location = wvUrl;
                 };
                 //-----------------------------
@@ -225,7 +225,7 @@ var World = {
                 });
 
                 buttonOverlay.onClick = function() {
-                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url);
+                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
                      document.location = wvUrl;
                 };
 
@@ -324,10 +324,10 @@ var World = {
 		World.buttonSnap.translate.x = -layout.offsetX;
 		World.buttonSnap.translate.y = -layout.offsetY;
 
-		World.buttonRotate.scale.x =  1;
-		World.buttonRotate.scale.y =  1;
-		World.buttonSnap.scale.x =  1;
-		World.buttonSnap.scale.y =  1;
+//		World.buttonRotate.scale.x =  1;
+//		World.buttonRotate.scale.y =  1;
+//		World.buttonSnap.scale.x =  1;
+//		World.buttonSnap.scale.y =  1;
 
 		World.model3D.scale = {
 			x: layout.carScale,
@@ -347,12 +347,12 @@ var World = {
 		if (World.snapped) {
 			World.previousScaleValue = World.model3D.scale.x;
 			World.previousScaleValueButtons = World.buttonRotate.scale.x;
-
-			World.previousTranslateValueRotate.x = World.buttonRotate.translate.x;
-			World.previousTranslateValueRotate.y = World.buttonRotate.translate.x;
-
-			World.previousTranslateValueSnap.x = World.buttonSnap.translate.x;
-			World.previousTranslateValueSnap.y = World.buttonSnap.translate.x;
+//
+//			World.previousTranslateValueRotate.x = World.buttonRotate.translate.x;
+//			World.previousTranslateValueRotate.y = World.buttonRotate.translate.x;
+//
+//			World.previousTranslateValueSnap.x = World.buttonSnap.translate.x;
+//			World.previousTranslateValueSnap.y = World.buttonSnap.translate.x;
 		}
     },
     onScaleChanged: function(scale) {
@@ -361,17 +361,17 @@ var World = {
            World.model3D.scale.y = World.model3D.scale.x;
            World.model3D.scale.z = World.model3D.scale.x;
 
-           World.buttonRotate.scale.x =  World.previousScaleValueButtons * scale;
-           World.buttonRotate.scale.y =  World.buttonRotate.scale.x;
+//           World.buttonRotate.scale.x =  World.previousScaleValueButtons * scale;
+//           World.buttonRotate.scale.y =  World.buttonRotate.scale.x;
+//
+//           World.buttonSnap.scale.x =  World.buttonRotate.scale.x;
+//           World.buttonSnap.scale.y =  World.buttonRotate.scale.x;
 
-           World.buttonSnap.scale.x =  World.buttonRotate.scale.x;
-           World.buttonSnap.scale.y =  World.buttonRotate.scale.x;
+//           World.buttonRotate.translate.x = World.previousTranslateValueRotate.x * scale;
+//           World.buttonRotate.translate.y = World.previousTranslateValueRotate.y * scale;
 
-           World.buttonRotate.translate.x = World.previousTranslateValueRotate.x * scale;
-           World.buttonRotate.translate.y = World.previousTranslateValueRotate.y * scale;
-
-           World.buttonSnap.translate.x = World.previousTranslateValueSnap.x * scale;
-           World.buttonSnap.translate.y = World.previousTranslateValueSnap.y * scale;
+//           World.buttonSnap.translate.x = World.previousTranslateValueSnap.x * scale;
+//           World.buttonSnap.translate.y = World.previousTranslateValueSnap.y * scale;
    		}
     },
 
