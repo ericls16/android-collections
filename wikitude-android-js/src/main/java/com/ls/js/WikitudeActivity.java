@@ -1,24 +1,34 @@
 package com.ls.js;
 
+
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.location.LocationListener;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ls.js.wikitude.AbstractArchitectCamActivity;
 import com.ls.js.wikitude.ArchitectViewHolderInterface;
 import com.ls.js.wikitude.Constants;
 import com.wikitude.architect.ArchitectView;
+import com.wikitude.architect.ArchitectView.ArchitectUrlListener;
+import com.wikitude.architect.ArchitectView.SensorAccuracyChangeListener;
 import com.wikitude.common.camera.CameraSettings;
 
 import java.io.File;
+
 
 /**
  * 云识别
  * Created by liu song on 2016/12/19.
  */
-
 public class WikitudeActivity extends AbstractArchitectCamActivity {
+
+    /**
+     * last time the calibration toast was shown, this avoids too many toast shown when compass needs calibration
+     */
+    private long lastCalibrationToastShownTimeMillis = System.currentTimeMillis();
 
     @Override
     public int getContentViewId() {
@@ -47,12 +57,21 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
 
     @Override
     public ArchitectView.SensorAccuracyChangeListener getSensorAccuracyListener() {
-        return null;
+        return new SensorAccuracyChangeListener() {
+            @Override
+            public void onCompassAccuracyChanged(int accuracy) {
+                /* UNRELIABLE = 0, LOW = 1, MEDIUM = 2, HIGH = 3 */
+                if (accuracy < SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM && WikitudeActivity.this != null && !WikitudeActivity.this.isFinishing() && System.currentTimeMillis() - WikitudeActivity.this.lastCalibrationToastShownTimeMillis > 5 * 1000) {
+                    Toast.makeText(WikitudeActivity.this, "Please re-calibrate compass by waving your device in a figure 8 motion.", Toast.LENGTH_LONG).show();
+                    WikitudeActivity.this.lastCalibrationToastShownTimeMillis = System.currentTimeMillis();
+                }
+            }
+        };
     }
 
     @Override
     public ArchitectView.ArchitectUrlListener getUrlListener() {
-        return new ArchitectView.ArchitectUrlListener() {
+        return new ArchitectUrlListener() {
 
             @Override
             public boolean urlWasInvoked(String uriString) {
@@ -62,13 +81,17 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
                 //跳转webview
                 if ("link".equalsIgnoreCase(invokedUri.getHost())) {
                     String url = invokedUri.getQueryParameter("uri");
+                    String title = invokedUri.getQueryParameter("title");
+                    String content = invokedUri.getQueryParameter("content");
+
                     Intent intent = new Intent(WikitudeActivity.this, WebActivity.class);
                     intent.putExtra("url_type", "WEB_PAGE_URL");
                     intent.putExtra("url", url);
+                    intent.putExtra("title", title);
+                    intent.putExtra("content", content);
                     startActivity(intent);
-                    return true;
+                    finish();
                 }
-
                 return true;
             }
         };
@@ -85,7 +108,7 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
     }
 
     @Override
-    public ILocationProvider getLocationProvider(LocationListener locationListener) {
+    public ILocationProvider getLocationProvider(final LocationListener locationListener) {
         return null;
     }
 
@@ -121,4 +144,5 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
         //??? what's meaning?
         return false;
     }
+
 }

@@ -9,8 +9,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,56 +28,8 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
 
     private WebView webView;
     private String share_url;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(0x00ff00ff);
-        }
-
-        setContentView(R.layout.activity_web);
-        webView = (WebView) findViewById(R.id.web_view);
-        webViewConfiguration(webView);
-        initData();
-    }
-
-    private void initData() {
-        String url_type = getIntent().getStringExtra("url_type");
-        if (TextUtils.equals(url_type, "WEB_PAGE_URL")) {
-            webView.loadUrl(getIntent().getStringExtra("url"));
-        }
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_share:
-                openShareBoard();
-                break;
-            case R.id.iv_back:
-                finish();
-                break;
-        }
-    }
-
-    private void openShareBoard() {
-        ShareBoardConfig config = new ShareBoardConfig();
-        config.setIndicatorVisibility(false);
-
-        new ShareAction(WebActivity.this)
-                .withText("hello")
-                .withTitle("share")
-                .withTargetUrl(share_url)
-                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setCallback(umShareListener)
-                .open(config);
-    }
-
+    private String title;
+    private String content;
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
@@ -104,6 +54,51 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     };
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_web);
+        webView = (WebView) findViewById(R.id.web_view);
+        webViewConfiguration(webView);
+        initData();
+    }
+
+    private void initData() {
+        String url_type = getIntent().getStringExtra("url_type");
+        if (TextUtils.equals(url_type, "WEB_PAGE_URL")) {
+            title = getIntent().getStringExtra("title");
+            content = getIntent().getStringExtra("content");
+            webView.loadUrl(getIntent().getStringExtra("url"));
+//            webView.loadUrl("https://www.baidu.com");
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_share:
+                openShareBoard();
+                break;
+            case R.id.iv_back:
+                goScan();
+                break;
+        }
+    }
+
+    private void openShareBoard() {
+        ShareBoardConfig config = new ShareBoardConfig();
+        config.setIndicatorVisibility(false);
+
+        new ShareAction(WebActivity.this)
+                .withText(content)
+                .withTitle(title)
+                .withTargetUrl(share_url)
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setCallback(umShareListener)
+                .open(config);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
@@ -116,7 +111,17 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        webView.goBack();
+//        if(webView.canGoBack()){
+//            webView.goBack();
+//        }else{
+//            goScan();
+//        }
+        goScan();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -130,6 +135,11 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
             webView.removeAllViews();
             webView.destroy();
         }
+    }
+
+    private void goScan() {
+        WebActivity.this.finish();
+        startActivity(new Intent(this, WikitudeActivity.class));
     }
 
     @Override

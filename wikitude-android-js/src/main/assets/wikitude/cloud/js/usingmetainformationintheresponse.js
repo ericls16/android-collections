@@ -10,17 +10,17 @@ var World = {
     interactionContainer: 'snapContainer',
     layout: {
     	normal: {
-    		offsetX: 0.45,
-    		offsetY: 0.55,
+    		offsetX: 0.35,
+    		offsetY: 0.45,
     		opacity: 0.0,
-    		carScale: 0.2,
+    		carScale: 0.06,
     		carTranslateY: 0
     	},
     	snapped: {
-    		offsetX: 0.45,
-    		offsetY: 0.55,
+    		offsetX: 0.35,
+    		offsetY: 0.45,
     		opacity: 0.2,
-    		carScale: 0.2,
+    		carScale: 0.06,
     		carTranslateY: 0
     	}
     },
@@ -163,37 +163,45 @@ var World = {
                 World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
                 //---------------------------
 
+                if (World.imgRotate !== undefined) {
+                	World.imgRotate.destroy();
+                }
+
                 if (World.buttonRotate !== undefined) {
                 	World.buttonRotate.destroy();
                 }
 
-                var imgRotate = new AR.ImageResource("assets/rotateButton.png");
-                World.buttonRotate = new AR.ImageDrawable(imgRotate, 0.2, {
+                World.imgRotate = new AR.ImageResource("assets/rotateButton.png");
+                World.buttonRotate = new AR.ImageDrawable(World.imgRotate, 0.2, {
                 	offsetX: 0.20,
                 	offsetY: 0.30,
                 	onClick: World.toggleAnimateModel
                 });
 
+                if (World.imgSnap !== undefined) {
+                	World.imgSnap.destroy();
+                }
+
                 if (World.buttonSnap !== undefined) {
                 	World.buttonSnap.destroy();
                 }
 
-                var imgSnap = new AR.ImageResource("assets/snapButton.png");
-                World.buttonSnap = new AR.ImageDrawable(imgSnap, 0.2, {
+                World.imgSnap = new AR.ImageResource("assets/snapButton.png");
+                World.buttonSnap = new AR.ImageDrawable(World.imgSnap, 0.2, {
                     offsetX: -0.20,
                     offsetY: -0.30,
                     onClick: World.toggleSnapping
                 });
                 //-----------------------------
-                var imgButton = new AR.ImageResource(response.metadata.picture_url);
-                var buttonOverlay = new AR.ImageDrawable(imgButton, 0.15, {
+                World.imgButton = new AR.ImageResource(response.metadata.picture_url);
+                World.buttonOverlay = new AR.ImageDrawable(World.imgButton, 0.15, {
                 	translate: {
                 		x: 0,
                 		y: -0.8
                 	}
                 });
 
-                buttonOverlay.onClick = function() {
+                World.buttonOverlay.onClick = function() {
                      var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
                      document.location = wvUrl;
                 };
@@ -204,7 +212,7 @@ var World = {
 
                 World.modelArguments = new AR.ImageTrackable(World.tracker, response.targetInfo.name , {
                 	drawables: {
-                		cam: [buttonOverlay,World.model3D,World.buttonSnap,World.buttonRotate]
+                		cam: [World.buttonOverlay,World.model3D,World.buttonSnap,World.buttonRotate]
                 	},
                     snapToScreen: {
                     	snapContainer: document.getElementById('snapContainer')
@@ -213,20 +221,29 @@ var World = {
                     onExitFieldOfVision: World.disappear
                 });
 		    }else{
+
                 var div = document.getElementById("snapContainer");
                 div.className = "selected";
 
-                var imgButton = new AR.ImageResource(response.metadata.picture_url);
-                var buttonOverlay = new AR.ImageDrawable(imgButton, 0.15, {
+                if (World.imgButton2 !== undefined) {
+                	World.imgButton2.destroy();
+                }
+
+                if (World.buttonOverlay2 !== undefined) {
+                	World.buttonOverlay2.destroy();
+                }
+
+                World.imgButton2 = new AR.ImageResource(response.metadata.picture_url);
+                World.buttonOverlay2 = new AR.ImageDrawable(World.imgButton2, 0.15, {
                 	translate: {
                 		x: 0,
                 		y: 0.15
                 	}
                 });
 
-                buttonOverlay.onClick = function() {
-                     var wvUrl = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
-                     document.location = wvUrl;
+                World.buttonOverlay2.onClick = function() {
+                     var wvUrl2 = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
+                     document.location = wvUrl2;
                 };
 
                 if (World.modelArguments !== undefined) {
@@ -235,10 +252,12 @@ var World = {
 
                 World.modelArguments = new AR.ImageTrackable(World.tracker, response.targetInfo.name , {
                 	drawables: {
-                		cam: [buttonOverlay]
+                		cam: [World.buttonOverlay2]
                 	}
                 });
 		    }
+            //You must set it here
+		    World.snapped=false;
 
 		}else{
 //		    alert("failed");
