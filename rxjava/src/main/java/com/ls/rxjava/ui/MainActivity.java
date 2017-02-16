@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.ls.rxjava.R;
 import com.ls.rxjava.databinding.ActivityMainBinding;
+import com.ls.rxjava.ui.rxjava1.RxJava1Activity;
+import com.ls.rxjava.ui.rxjava2.RxJava2Activity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,11 +24,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_basic_implement: //1.基本实现
-                startActivity(new Intent(this, BasicImplementlActivity.class));
+            case R.id.btn_rxjava1:
+                startActivity(new Intent(this, RxJava1Activity.class));
                 break;
-            case R.id.btn_scheduler: //2.线程控制
-                startActivity(new Intent(this, SchedulerActivity.class));
+            case R.id.btn_rxjava2:
+                startActivity(new Intent(this, RxJava2Activity.class));
                 break;
         }
     }

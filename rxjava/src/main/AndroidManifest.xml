@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SchedulerActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|screenSize|orientation">
             <intent-filter>
@@ -17,17 +17,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--RxJava1-->
+
         <activity
-            android:name=".ui.BasicImplementlActivity"
-            android:label="@string/basic_implement"
+            android:name=".ui.rxjava1.RxJava1Activity"
+            android:label="RxJava1"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|screenSize|orientation" />
 
-        <!--<activity
-            android:name=".ui.SchedulerActivity"
-            android:label="@string/scheduler"
+        <activity
+            android:name=".ui.rxjava1.RxJava1BasicActivity"
+            android:label="RxJava1-基本实现"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|screenSize|orientation" />-->
+            android:configChanges="keyboardHidden|screenSize|orientation" />
+
+        <activity
+            android:name=".ui.rxjava1.RxJava1SchedulerActivity"
+            android:label="RxJava1-进阶"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|screenSize|orientation" />
+
+        <!--RxJava2-->
+
+        <activity
+            android:name=".ui.rxjava2.RxJava2Activity"
+            android:label="RxJava2"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|screenSize|orientation" />
     </application>
 
 </manifest>

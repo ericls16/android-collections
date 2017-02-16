@@ -12,18 +12,18 @@
             android:padding="8dp">
 
             <Button
-                android:id="@+id/btn_rxjava1"
+                android:id="@+id/btn_basic_implement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="RxJava1"
+                android:text="@string/basic_implement"
                 android:onClick="onClick"
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btn_rxjava2"
+                android:id="@+id/btn_scheduler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="RxJava2"
+                android:text="@string/scheduler"
                 android:onClick="onClick"
                 android:textAllCaps="false" />
         </LinearLayout>

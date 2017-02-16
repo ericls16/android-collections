@@ -1,4 +1,4 @@
-package com.ls.rxjava.ui;
+package com.ls.rxjava.ui.rxjava1;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ls.rxjava.R;
-import com.ls.rxjava.databinding.ActivityBasicImplementBinding;
+import com.ls.rxjava.databinding.ActivityRxjava1BasicBinding;
 
 import rx.Observable;
 import rx.Observer;
@@ -34,7 +34,7 @@ import rx.functions.Action1;
  * 2> 除了subscribe(Observer)和subscribe(Subscriber)，subscribe()还支持观察者的不完整定义的回调，RxJava会自动根据定义创建出Subscriber.
  * 3> Observer和Subscriber都是观察者，而且Observer在subscribe()过程中最终会被转换成Subscriber对象，因此，Subscriber来代替Observer更加严谨.
  * <p>
- *
+ * <p>
  * 总结：
  * 在RxJava的默认规则中，事件的发出和消费都是在同一个线程的。
  * 也就是说，如果只用上面的方法，实现出来的只是一个同步的观察者模式。
@@ -43,14 +43,14 @@ import rx.functions.Action1;
  * Created by liusong on 2017/1/31.
  */
 
-public class BasicImplementlActivity extends AppCompatActivity implements View.OnClickListener {
+public class RxJava1BasicActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivityBasicImplementBinding mBinding;
+    private ActivityRxjava1BasicBinding mBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_basic_implement);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_rxjava1_basic);
     }
 
     @Override
@@ -306,12 +306,12 @@ public class BasicImplementlActivity extends AppCompatActivity implements View.O
     /**
      * 订阅Observer:由id取得Drawable图片并显示在ImageView中
      */
-    private void showImageBySubscribeObserver(){
+    private void showImageBySubscribeObserver() {
 
         Observable.create(new Observable.OnSubscribe<Drawable>() {
             @Override
             public void call(Subscriber<? super Drawable> subscriber) {
-                Drawable drawable=getTheme().getDrawable(R.mipmap.uselessl);
+                Drawable drawable = getTheme().getDrawable(R.mipmap.uselessl);
                 subscriber.onNext(drawable);
                 subscriber.onCompleted();
             }
@@ -324,7 +324,7 @@ public class BasicImplementlActivity extends AppCompatActivity implements View.O
             @Override
             public void onError(Throwable e) {
                 Log.i("LOG_CAT", "onError");
-                Toast.makeText(BasicImplementlActivity.this, "display image error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RxJava1BasicActivity.this, "display image error!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
