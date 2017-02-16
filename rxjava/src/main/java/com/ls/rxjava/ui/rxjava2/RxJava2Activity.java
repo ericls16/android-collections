@@ -1,5 +1,6 @@
 package com.ls.rxjava.ui.rxjava2;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,9 @@ public class RxJava2Activity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.btn_basic:
+                startActivity(new Intent(this,RxJava2BasicActivity.class));
+                break;
         }
     }
 }
