@@ -94,7 +94,7 @@ var World = {
 	onRecognition: function onRecognitionFn(recognized, response) {
 		if (recognized) {
 //            alert("su");
-		    if(response.metadata.D_url.length!=0){
+		    if(response.metadata.type===2){
                 var div = document.getElementById("snapContainer");
                 div.className = "";
 
@@ -220,7 +220,7 @@ var World = {
                     onEnterFieldOfVision: World.appear,
                     onExitFieldOfVision: World.disappear
                 });
-		    }else{
+		    }else if(response.metadata.type===1){
 
                 var div = document.getElementById("snapContainer");
                 div.className = "selected";

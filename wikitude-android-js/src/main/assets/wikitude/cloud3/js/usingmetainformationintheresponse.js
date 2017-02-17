@@ -101,7 +101,7 @@ var World = {
                 World.video.pause();
             }
 
-		    if(response.metadata.D_url.length!=0){
+		    if(response.metadata.type===2){
 
                 var div = document.getElementById("snapContainer");
                 div.className = "";
@@ -211,7 +211,7 @@ var World = {
                     }
                 });
 
-		    }else if(response.metadata.video_url.length!=0){
+		    }else if(response.metadata.type===3){
 
 //		        var div = document.getElementById("snapContainer");
 //                div.className = "selected";
@@ -283,7 +283,7 @@ var World = {
                     	snapContainer: document.getElementById('snapContainer')
                     }
                 });
-		    }else{
+		    }else if(response.metadata.type===1){
 
                 var div = document.getElementById("snapContainer");
                 div.className = "selected";
