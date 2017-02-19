@@ -1,3 +1,3 @@
-include ':libray', ':collections', ':rxjava', ':retrofit'
+include ':libray', ':collections', ':retrofit',':rxjava'
 
-//':collections',':libray',':wikitude-android-js'
+//':wikitude-android-js',':rxjava'
