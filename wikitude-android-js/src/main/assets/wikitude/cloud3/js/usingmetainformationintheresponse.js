@@ -172,7 +172,7 @@ var World = {
                 });
 
                 //---------------------------------
-                World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.modelscale);
+                World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.model_scale);
                 World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
                 //---------------------------
 

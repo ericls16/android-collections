@@ -1,6 +1,10 @@
 云服务器json:
 
 
+type=1 -> button
+type=2 -> 3d
+type=3 -> 视屏
+
 {
     "type": 3,
     "title": "展台",
