@@ -114,7 +114,7 @@ public class WikitudeActivity extends AbstractArchitectCamActivity {
 
     @Override
     public String getARchitectWorldPath() {
-        return "wikitude" + File.separator + "cloud2" + File.separator + "index.html";
+        return "wikitude" + File.separator + "cloud" + File.separator + "index.html";
     }
 
     @Override
