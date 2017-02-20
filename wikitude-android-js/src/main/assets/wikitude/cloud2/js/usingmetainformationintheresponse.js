@@ -96,7 +96,7 @@ var World = {
 	onRecognition: function onRecognitionFn(recognized, response) {
 		if (recognized) {
 //            alert("su");
-		    if(response.metadata.type===2){
+		    if(response.metadata.type === 2){
                 var div = document.getElementById("snapContainer");
                 div.className = "";
 
@@ -110,8 +110,10 @@ var World = {
                     onLoaded: World.loadingStep,
 //                    onClick: World.toggleAnimateModel,
                     onClick: function(){
-                        var wvUrl2 = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
-                        document.location = wvUrl2;
+                        if(response.metadata.target_url.length!==0){
+                            var wvUrl2 = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
+                            document.location = wvUrl2;
+                        }
                     },
 
                     scale: {
@@ -166,7 +168,7 @@ var World = {
                 });
 
                 //---------------------------------
-                World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.modelscale);
+                World.appearingAnimation = World.createAppearingAnimation(World.model3D, response.metadata.model_scale);
                 World.rotationAnimation = new AR.PropertyAnimation(World.model3D, "rotate.roll", -25, 335, 10000);
                 //---------------------------
 
@@ -205,7 +207,7 @@ var World = {
                     }
                 });
 
-		    }else if(response.metadata.type===3){
+		    }else if(response.metadata.type === 3){
 		        var div = document.getElementById("snapContainer");
                 div.className = "selected";
 
@@ -225,7 +227,7 @@ var World = {
                     }
                 });
 
-                var video = new AR.VideoDrawable(response.metadata.video_url, 0.40, {
+                var video = new AR.VideoDrawable(response.metadata.video_url, response.metadata.video_scale, {
                 	translate: { y:playButton.translate.y },
                 	zOrder: 1,
                 	onLoaded: function videoLoaded() {
@@ -273,7 +275,7 @@ var World = {
                     }
                 });
 
-		    }else if(response.metadata.type===1){
+		    }else if(response.metadata.type === 1){
 
                 var div = document.getElementById("snapContainer");
                 div.className = "selected";
@@ -287,7 +289,7 @@ var World = {
                 }
 
                 World.imgButton2 = new AR.ImageResource(response.metadata.picture_url);
-                World.buttonOverlay2 = new AR.ImageDrawable(World.imgButton2, 0.15, {
+                World.buttonOverlay2 = new AR.ImageDrawable(World.imgButton2, response.metadata.button_scale, {
                 	translate: {
                 		x: 0,
                 		y: 0.15
@@ -295,8 +297,10 @@ var World = {
                 });
 
                 World.buttonOverlay2.onClick = function() {
-                     var wvUrl2 = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
-                     document.location = wvUrl2;
+                     if(response.metadata.target_url.length!==0){
+                         var wvUrl2 = "architectsdk://link?uri="+ encodeURIComponent(response.metadata.target_url)+"&title="+ encodeURIComponent(response.metadata.title)+"&content="+ encodeURIComponent(response.metadata.content);
+                         document.location = wvUrl2;
+                     }
                 };
 
                 if (World.modelArguments !== undefined) {
