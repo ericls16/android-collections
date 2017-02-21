@@ -11,10 +11,12 @@ import com.ls.retrofit.api.ApiCommonVo;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityMainBinding;
+import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,7 +62,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onNext(WeatherVo dataSet) {
-                        mBinding.tvResult.setText("预报时间："+dataSet.getResult().getData().getWeather().get(0).getDate());
+                        mBinding.tvResult.setText("预报时间：" + dataSet.getResult().getData().getWeather().get(0).getDate());
+                    }
+                });
+    }
+
+    /**
+     * ？？？
+     * 回调信息统一封装类
+     */
+    private void requestWeatherBean() {
+        ApiServiceFactory.getInstance().create(ApiService.class)
+                .queryWeatherBean("上海", "c835721be56ed3b6e603c6873625d4d5")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<ApiCommonVo<WeatherBean>, WeatherBean>() {
+                    @Override
+                    public WeatherBean call(ApiCommonVo<WeatherBean> dataSet) {
+                        return dataSet.getData();
+                    }
+                })
+                .subscribe(new Subscriber<WeatherBean>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(MainActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(WeatherBean weatherBean) {
+                        mBinding.tvResult.setText("预报时间：" + weatherBean.getData().getWeather().get(0).getDate());
                     }
                 });
     }

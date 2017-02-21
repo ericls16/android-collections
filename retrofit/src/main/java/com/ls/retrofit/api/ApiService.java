@@ -1,6 +1,7 @@
 package com.ls.retrofit.api;
 
 import com.android.annotations.NonNull;
+import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
 
 import retrofit2.http.GET;
@@ -16,4 +17,8 @@ public interface ApiService {
     @GET("http://op.juhe.cn/onebox/weather/query")
     Observable<WeatherVo> queryWeather(@NonNull @Query("cityname") String cityname,
                                        @NonNull @Query("key") String key);
+
+    @GET("http://op.juhe.cn/onebox/weather/query")
+    Observable<ApiCommonVo<WeatherBean>> queryWeatherBean(@NonNull @Query("cityname") String cityname,
+                                                          @NonNull @Query("key") String key);
 }
