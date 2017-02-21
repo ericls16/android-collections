@@ -5,5 +5,5 @@ package com.ls.retrofit.app;
  */
 
 public class Constants {
-    public static final String BASE_URL="";
+    public static final String BASE_URL="http://baseurl/";
 }
