@@ -1,14 +1,11 @@
 package com.ls.retrofit.api;
 
 import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
 import com.ls.retrofit.custom.cookie.CookieManager;
-
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -21,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiServiceFactory {
 
     private static ApiServiceFactory instance;
-    private final Map<Class<?>, Object> serviceMap = new ArrayMap<>();
 
     public static ApiServiceFactory getInstance() {
         if (instance == null) {
