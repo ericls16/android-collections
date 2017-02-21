@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .enqueue(new Callback<WeatherVo>() {
                     @Override
                     public void onResponse(Call<WeatherVo> call, Response<WeatherVo> response) {
-                        Toast.makeText(MainActivity.this, response.body().getResult().getData().getWeather().get(0).getDate(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
+                        mBinding.tvResult.setText("result="+response.body().getResult().getData().getWeather().get(0).getDate());
                     }
 
                     @Override
