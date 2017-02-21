@@ -18,13 +18,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiServiceFactory {
 
-    private static ApiServiceFactory instance;
+    //构造方法私有
+    private ApiServiceFactory() {
+    }
+
+    //volatile关键字禁止JVM指令重排序优化
+    private volatile static ApiServiceFactory INSTANCE;
 
     public static ApiServiceFactory getInstance() {
-        if (instance == null) {
-            instance = new ApiServiceFactory();
+        if (INSTANCE == null) {
+            synchronized (ApiServiceFactory.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new ApiServiceFactory();
+                }
+            }
         }
-        return instance;
+        return INSTANCE;
     }
 
     public <T> T create(@NonNull Class<T> service) {
