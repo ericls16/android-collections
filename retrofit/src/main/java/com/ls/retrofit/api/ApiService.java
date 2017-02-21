@@ -3,6 +3,8 @@ package com.ls.retrofit.api;
 import com.android.annotations.NonNull;
 import com.ls.retrofit.vo.WeatherVo;
 
+import retrofit2.Call;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -14,6 +16,6 @@ import rx.Observable;
 public interface ApiService {
 
     @GET("http://op.juhe.cn/onebox/weather/query")
-    Observable<WeatherVo> queryWeather(@NonNull @Query("cityname") String cityname,
-                                       @NonNull @Query("key") String key);
+    Call<WeatherVo> queryWeather(@NonNull @Query("cityname") String cityname,
+                                 @NonNull @Query("key") String key);
 }

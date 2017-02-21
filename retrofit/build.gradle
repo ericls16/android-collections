@@ -25,6 +25,7 @@ android {
         enabled=true
     }
 
+    //解决依赖包版本冲突
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
     }
