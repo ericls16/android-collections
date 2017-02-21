@@ -1,9 +1,10 @@
-package com.ls.retrofit;
+package com.ls.retrofit.ui;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.ls.retrofit.R;
 import com.ls.retrofit.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        mBinding= DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 }
