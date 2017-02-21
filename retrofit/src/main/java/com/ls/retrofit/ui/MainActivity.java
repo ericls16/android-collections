@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WeatherVo>() {
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
+
                     @Override
                     public void onCompleted() {
                         Toast.makeText(MainActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
@@ -83,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 })
                 .subscribe(new Subscriber<WeatherBean>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
+
                     @Override
                     public void onCompleted() {
                         Toast.makeText(MainActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
