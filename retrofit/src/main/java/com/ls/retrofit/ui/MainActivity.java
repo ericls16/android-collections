@@ -1,37 +1,36 @@
 package com.ls.retrofit.ui;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ls.retrofit.R;
+import com.ls.retrofit.api.ApiCommonVo;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityMainBinding;
 import com.ls.retrofit.vo.WeatherVo;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding= DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 
     @Override
 
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_weather:
                 requestWeatherInfo();
                 break;
@@ -45,21 +44,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void requestWeatherInfo() {
         ApiServiceFactory.getInstance().create(ApiService.class)
-                .queryWeather("上海","c835721be56ed3b6e603c6873625d4d5")
-                .enqueue(new Callback<WeatherVo>() {
+                .queryWeather("上海", "c835721be56ed3b6e603c6873625d4d5")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WeatherVo>() {
                     @Override
-                    public void onResponse(Call<WeatherVo> call, Response<WeatherVo> response) {
-                        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
-                        mBinding.tvResult.setText(""+response.body().getResult().getData().getWeather().get(0).getDate());
+                    public void onCompleted() {
+                        Toast.makeText(MainActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onFailure(Call<WeatherVo> call, Throwable t) {
-                        Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+                    public void onError(Throwable e) {
+                        Toast.makeText(MainActivity.this, "onError", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(WeatherVo dataSet) {
+                        mBinding.tvResult.setText("预报时间："+dataSet.getResult().getData().getWeather().get(0).getDate());
                     }
                 });
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread());
     }
 }
