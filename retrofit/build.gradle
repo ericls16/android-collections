@@ -24,6 +24,11 @@ android {
     dataBinding{
         enabled=true
     }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
+    }
+
 }
 
 dependencies {
@@ -41,5 +46,14 @@ dependencies {
 
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' //Rxjava适配库
+
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
+
+
 }
+
+
+
+

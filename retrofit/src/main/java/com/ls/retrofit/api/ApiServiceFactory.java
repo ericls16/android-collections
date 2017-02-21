@@ -9,6 +9,7 @@ import com.ls.retrofit.custom.cookie.CookieManager;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -35,6 +36,7 @@ public class ApiServiceFactory {
                 .baseUrl(Constants.BASE_URL)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //添加对Rxjava的适配
                 .build();
     }
 
