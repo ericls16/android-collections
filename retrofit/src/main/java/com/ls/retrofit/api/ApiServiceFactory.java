@@ -18,12 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiServiceFactory {
 
+    //volatile关键字禁止JVM指令重排序优化
+    private volatile static ApiServiceFactory INSTANCE;
+
     //构造方法私有
     private ApiServiceFactory() {
     }
-
-    //volatile关键字禁止JVM指令重排序优化
-    private volatile static ApiServiceFactory INSTANCE;
 
     public static ApiServiceFactory getInstance() {
         if (INSTANCE == null) {
