@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiServiceFactory {
 
+
     private static final Map<Class<?>, Object> SERVICE_MAP = new ArrayMap<>();
     //volatile关键字禁止JVM指令重排序优化
     private volatile static ApiServiceFactory INSTANCE;
