@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.ls.retrofit.R;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
+import com.ls.retrofit.base.BaseFragment;
 import com.ls.retrofit.databinding.FragmentTestBinding;
 import com.ls.retrofit.ui.activity.MainActivity;
 import com.ls.retrofit.vo.WeatherVo;
@@ -26,7 +27,7 @@ import rx.schedulers.Schedulers;
  * Created by liu song on 2017/2/22.
  */
 
-public class TestFragment extends Fragment implements View.OnClickListener{
+public class TestFragment extends BaseFragment implements View.OnClickListener{
 
     private FragmentTestBinding mBinding;
 

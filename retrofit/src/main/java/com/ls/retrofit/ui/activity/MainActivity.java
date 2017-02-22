@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.ls.retrofit.R;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
+import com.ls.retrofit.base.BaseActivity;
 import com.ls.retrofit.databinding.ActivityMainBinding;
 import com.ls.retrofit.ui.fragment.TestFragment;
 import com.ls.retrofit.vo.ApiCommonVo;
@@ -21,7 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityMainBinding mBinding;
 

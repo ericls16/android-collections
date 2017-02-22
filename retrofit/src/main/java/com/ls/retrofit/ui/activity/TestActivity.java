@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.ls.retrofit.R;
+import com.ls.retrofit.base.BaseActivity;
 import com.ls.retrofit.databinding.ActivityTestBinding;
 
 /**
  * Created by liu song on 2017/2/22.
  */
 
-public class TestActivity extends AppCompatActivity implements View.OnClickListener {
+public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityTestBinding mBinding;
 
