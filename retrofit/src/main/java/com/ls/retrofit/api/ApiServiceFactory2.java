@@ -6,7 +6,7 @@ import android.util.ArrayMap;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
-import com.ls.retrofit.custom.cookie.CookieManager;
+import com.ls.retrofit.custom.cookie_jar.CookieManager;
 
 import java.util.Map;
 

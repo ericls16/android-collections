@@ -4,9 +4,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
-import com.ls.retrofit.custom.cookie.CookieManager;
+import com.ls.retrofit.custom.cookie_jar.CookieManager;
 
 import java.util.Map;
 
@@ -53,6 +57,7 @@ public class ApiServiceFactory {
      * -------------------
      */
     private static void initRetrofit() {
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
                 //--------------------------------------
                 //拦截请求，添加header请求头，重新发送。
@@ -67,7 +72,8 @@ public class ApiServiceFactory {
                 })*/
                 //--------------------------------------
                 .addNetworkInterceptor(new StethoInterceptor())
-                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie
+//                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie(手动实现CookieManager )
+                .cookieJar(cookieJar)
                 .build();
         RETROFIT = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)

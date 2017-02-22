@@ -1,4 +1,4 @@
-package com.ls.retrofit.custom.cookie;
+package com.ls.retrofit.custom.cookie_jar;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

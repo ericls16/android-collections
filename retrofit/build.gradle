@@ -32,6 +32,11 @@ android {
 
 }
 
+repositories {
+    //Cookie持久化的第三方库maven地址
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -52,6 +57,8 @@ dependencies {
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
 
+    //Cookie持久化的第三方库
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
 }
 
