@@ -10,8 +10,12 @@ import com.ls.retrofit.R;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityTestBinding;
+import com.ls.retrofit.vo.CommonVo;
 import com.ls.retrofit.vo.WeatherVo;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -46,29 +50,16 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void requestWeatherInfo() {
         ApiServiceFactory.getInstance().create(ApiService.class)
-                .queryWeather("上海", "c835721be56ed3b6e603c6873625d4d5")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeatherVo>() {
-
+                .getUsers("supplier")
+                .enqueue(new Callback<CommonVo>() {
                     @Override
-                    public void onStart() {
-                        super.onStart();
+                    public void onResponse(Call<CommonVo> call, Response<CommonVo> response) {
+                        Toast.makeText(TestActivity.this, "onResponse", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onCompleted() {
-                        Toast.makeText(TestActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(TestActivity.this, "onError", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(WeatherVo dataSet) {
-                        mBinding.tvResult.setText("预报时间：" + dataSet.getResult().getData().getWeather().get(0).getDate());
+                    public void onFailure(Call<CommonVo> call, Throwable t) {
+                        Toast.makeText(TestActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

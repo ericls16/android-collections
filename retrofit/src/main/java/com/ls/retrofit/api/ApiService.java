@@ -1,10 +1,13 @@
 package com.ls.retrofit.api;
 
 import com.android.annotations.NonNull;
+import com.ls.retrofit.vo.CommonVo;
 import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
 
-import retrofit2.http.GET;
+import retrofit2.Call;
+import retrofit2.http.GET;;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -21,4 +24,8 @@ public interface ApiService {
     @GET("http://op.juhe.cn/onebox/weather/query")
     Observable<ApiCommonVo<WeatherBean>> queryWeatherBean(@NonNull @Query("cityname") String cityname,
                                                           @NonNull @Query("key") String key);
+
+    @GET("http://supplierapi.soolife.cn/business/acccount/{url}")
+    Call<CommonVo> getUsers(@Path("url") String url);
+
 }

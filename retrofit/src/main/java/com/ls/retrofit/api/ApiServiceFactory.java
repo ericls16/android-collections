@@ -8,9 +8,13 @@ import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
 import com.ls.retrofit.custom.cookie.CookieManager;
 
+import java.io.IOException;
 import java.util.Map;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,6 +58,20 @@ public class ApiServiceFactory {
      */
     private static void initRetrofit() {
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request().newBuilder()
+                                .addHeader("Authorization","Basic NjAxMTAwMDE6TlRBMVFVRXpSVEZEUWpJMVJUWXlPRU0xTXpZME56a3dSVEU0TTBaQ1JFVT0=")
+                                .addHeader("Content-Type","application/json;charset=UTF-8")
+                                .addHeader("app_id","50010001")
+                                .addHeader("token","f3f279afdd6d249f4803f5dc7eadb56c")
+                                .addHeader("app_key","QTI2RDlGQTY4RjgzREFCMEIzNEYxNTUyODQ3NzhCRTc=")
+                                .build();
+
+                        return chain.proceed(request);
+                    }
+                })
                 .addNetworkInterceptor(new StethoInterceptor())
                 .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie
                 .build();
