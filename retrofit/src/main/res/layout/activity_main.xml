@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.ls.retrofit.ui.MainActivity">
+        tools:context="com.ls.retrofit.ui.activity.MainActivity">
 
         <Button
             android:id="@+id/btn_skip"
@@ -30,6 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Hello World!" />
+
+        <FrameLayout
+            android:id="@+id/contain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </layout>

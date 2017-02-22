@@ -1,4 +1,4 @@
-package com.ls.retrofit.ui;
+package com.ls.retrofit.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

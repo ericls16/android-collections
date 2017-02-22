@@ -1,4 +1,4 @@
-package com.ls.retrofit.ui;
+package com.ls.retrofit.ui.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ls.retrofit.R;
-import com.ls.retrofit.vo.ApiCommonVo;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityMainBinding;
+import com.ls.retrofit.ui.fragment.TestFragment;
+import com.ls.retrofit.vo.ApiCommonVo;
 import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
 
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        initFragment();
+    }
+
+    private void initFragment() {
+        getFragmentManager().beginTransaction()
+                .add(R.id.contain, new TestFragment())
+                .commitAllowingStateLoss();
     }
 
     @Override
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 requestWeatherInfo();
                 break;
             case R.id.btn_skip:
-                startActivity(new Intent(this,TestActivity.class));
+                startActivity(new Intent(this, TestActivity.class));
                 break;
             default:
                 break;
