@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * ApiServiceFactory2
- * <p>
  * 本类采用静态代码块来初始化retrofit
  * Created by liu song on 2017/2/22.
  */
