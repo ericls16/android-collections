@@ -12,9 +12,13 @@ import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
 import com.ls.retrofit.custom.cookie_jar.CookieManager;
 
+import java.io.IOException;
 import java.util.Map;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -64,8 +68,12 @@ public class ApiServiceFactory {
                 /*.addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request().newBuilder()
-                                .addHeader("Content-Type","application/json;charset=UTF-8")
+                        Request original = chain.request();
+                        Request request = original.newBuilder()
+                                .header("User-Agent", "Android, xxx")
+                                .header("Accept", "application/json")
+                                .header("Content-type", "application/json")
+                                .method(original.method(), original.body())
                                 .build();
                         return chain.proceed(request);
                     }
