@@ -1,4 +1,4 @@
-package com.ls.retrofit.custom.converter_factory;
+package com.ls.retrofit.custom.converter_factory.custom;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

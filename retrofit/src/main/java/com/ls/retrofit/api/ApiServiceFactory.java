@@ -86,7 +86,8 @@ public class ApiServiceFactory {
         RETROFIT = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .client(okhttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create()) //Gson
+//                .addConverterFactory(FastJsonConvertFactory.create()) //FastJson
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //添加对Rxjava的适配
                 .build();
     }

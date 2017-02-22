@@ -60,6 +60,8 @@ dependencies {
     //Cookie持久化的第三方库
     compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
+    compile 'com.alibaba:fastjson:1.1.56.android'
+
 }
 
 
