@@ -2,7 +2,6 @@ package com.ls.retrofit.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.ls.retrofit.R;

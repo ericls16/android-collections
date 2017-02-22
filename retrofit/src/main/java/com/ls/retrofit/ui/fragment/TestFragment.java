@@ -1,7 +1,5 @@
 package com.ls.retrofit.ui.fragment;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -16,9 +14,7 @@ import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.base.BaseFragment;
 import com.ls.retrofit.databinding.FragmentTestBinding;
-import com.ls.retrofit.ui.activity.MainActivity;
 import com.ls.retrofit.vo.WeatherVo;
-import com.trello.rxlifecycle.android.FragmentEvent;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,7 +24,7 @@ import rx.schedulers.Schedulers;
  * Created by liu song on 2017/2/22.
  */
 
-public class TestFragment extends BaseFragment implements View.OnClickListener{
+public class TestFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentTestBinding mBinding;
 
@@ -37,20 +33,20 @@ public class TestFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext=context;
+        mContext = context;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_test,container,false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false);
         mBinding.setOnClickListener(this);
         return mBinding.getRoot();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_fragment:
                 requestWeatherInfo();
                 break;
@@ -86,7 +82,7 @@ public class TestFragment extends BaseFragment implements View.OnClickListener{
 
                     @Override
                     public void onNext(WeatherVo dataSet) {
-                        Toast.makeText(mContext, "onNext=预报时间："+dataSet.getResult().getData().getWeather().get(0).getDate(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "onNext=预报时间：" + dataSet.getResult().getData().getWeather().get(0).getDate(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

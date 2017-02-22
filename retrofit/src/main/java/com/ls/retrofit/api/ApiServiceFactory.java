@@ -10,15 +10,10 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
-import com.ls.retrofit.custom.cookie_jar.CookieManager;
 
-import java.io.IOException;
 import java.util.Map;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
