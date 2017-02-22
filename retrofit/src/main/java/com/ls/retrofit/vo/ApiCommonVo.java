@@ -1,4 +1,4 @@
-package com.ls.retrofit.api;
+package com.ls.retrofit.vo;
 
 /**
  * 回调信息统一封装类

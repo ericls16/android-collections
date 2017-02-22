@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ls.retrofit.R;
-import com.ls.retrofit.api.ApiCommonVo;
+import com.ls.retrofit.vo.ApiCommonVo;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityMainBinding;
