@@ -1,11 +1,14 @@
 package com.ls.retrofit.api;
 
 import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
 import com.ls.retrofit.custom.cookie.CookieManager;
+
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -18,8 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiServiceFactory {
 
+    private static final Map<Class<?>, Object> SERVICE_MAP = new ArrayMap<>();
     //volatile关键字禁止JVM指令重排序优化
     private volatile static ApiServiceFactory INSTANCE;
+    private static Retrofit RETROFIT;
 
     //构造方法私有
     private ApiServiceFactory() {
@@ -30,29 +35,35 @@ public class ApiServiceFactory {
             synchronized (ApiServiceFactory.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new ApiServiceFactory();
+                    initRetrofit();
                 }
             }
         }
         return INSTANCE;
     }
 
-    public <T> T create(@NonNull Class<T> service) {
-        return getRetrofit().create(service);
-    }
-
-    private Retrofit getRetrofit() {
-        return new Retrofit.Builder()
+    private static void initRetrofit() {
+        OkHttpClient okhttpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie
+                .build();
+        RETROFIT = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
-                .client(getOkHttpClient())
+                .client(okhttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //添加对Rxjava的适配
                 .build();
     }
 
-    private OkHttpClient getOkHttpClient() {
-        return new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie
-                .build();
+    public <T> T create(@NonNull Class<T> service) {
+        Object o = SERVICE_MAP.get(service);
+        if (o != null) {
+            return (T) o;
+        } else {
+            T t = RETROFIT.create(service);
+            SERVICE_MAP.put(service, t);
+            return t;
+        }
     }
+
 }

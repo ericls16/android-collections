@@ -1,5 +1,6 @@
 package com.ls.retrofit.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_weather:
                 requestWeatherInfo();
+                break;
+            case R.id.btn_skip:
+                startActivity(new Intent(this,TestActivity.class));
                 break;
             default:
                 break;
