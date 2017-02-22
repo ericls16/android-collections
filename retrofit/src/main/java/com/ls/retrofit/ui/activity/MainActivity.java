@@ -16,6 +16,7 @@ import com.ls.retrofit.ui.fragment.TestFragment;
 import com.ls.retrofit.vo.ApiCommonVo;
 import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -60,6 +61,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void requestWeatherInfo() {
         ApiServiceFactory.getInstance().create(ApiService.class)
                 .queryWeather("上海", "c835721be56ed3b6e603c6873625d4d5")
+//                .compose(this.<WeatherVo>bindToLifecycle()) //自动绑定生命周期
+                .compose(this.<WeatherVo>bindUntilEvent(ActivityEvent.DESTROY)) // 手动设置在Activity onDestroy的时候取消订阅
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WeatherVo>() {

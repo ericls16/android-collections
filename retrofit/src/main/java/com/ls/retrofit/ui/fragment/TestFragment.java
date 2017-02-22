@@ -18,6 +18,7 @@ import com.ls.retrofit.base.BaseFragment;
 import com.ls.retrofit.databinding.FragmentTestBinding;
 import com.ls.retrofit.ui.activity.MainActivity;
 import com.ls.retrofit.vo.WeatherVo;
+import com.trello.rxlifecycle.android.FragmentEvent;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -62,6 +63,8 @@ public class TestFragment extends BaseFragment implements View.OnClickListener{
     private void requestWeatherInfo() {
         ApiServiceFactory.getInstance().create(ApiService.class)
                 .queryWeather("上海", "c835721be56ed3b6e603c6873625d4d5")
+                .compose(this.<WeatherVo>bindToLifecycle())
+//                .compose(this.<WeatherVo>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WeatherVo>() {
