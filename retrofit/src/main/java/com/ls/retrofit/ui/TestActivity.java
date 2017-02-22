@@ -4,21 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ls.retrofit.R;
-import com.ls.retrofit.api.ApiService;
-import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.databinding.ActivityTestBinding;
-import com.ls.retrofit.vo.CommonVo;
-import com.ls.retrofit.vo.WeatherVo;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by liu song on 2017/2/22.
@@ -49,7 +37,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
      * 请求天气信息
      */
     private void requestWeatherInfo() {
-        ApiServiceFactory.getInstance().create(ApiService.class)
+        /*ApiServiceFactory.getInstance().create(ApiService.class)
                 .getUsers("supplier")
                 .enqueue(new Callback<CommonVo>() {
                     @Override
@@ -61,7 +49,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     public void onFailure(Call<CommonVo> call, Throwable t) {
                         Toast.makeText(TestActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
     }
 
 }
