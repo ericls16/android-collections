@@ -64,7 +64,7 @@ public class ApiServiceFactory {
         ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
                 //--------------------------------------
-                //拦截请求，添加header请求头，重新发送。
+                //拦截请求，添加header请求头，重新发送，可以添加自定义拦截器。
                 /*.addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
