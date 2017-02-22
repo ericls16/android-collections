@@ -42,7 +42,7 @@ public class ApiServiceFactory {
     }
 
     /**
-     * 初始化Retrofit：
+     * 初始化Retrofit(可以放在静态代码块里确保全局创建一次，详见ApiServiceFactory2)
      * -------------------
      * okhttpClient相关设置：
      * 超时设置：
