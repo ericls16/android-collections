@@ -4,10 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
 import com.ls.retrofit.custom.cookie_jar.CookieManager;

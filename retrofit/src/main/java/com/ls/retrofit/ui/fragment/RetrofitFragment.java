@@ -13,7 +13,7 @@ import com.ls.retrofit.R;
 import com.ls.retrofit.api.ApiService;
 import com.ls.retrofit.api.ApiServiceFactory;
 import com.ls.retrofit.base.BaseFragment;
-import com.ls.retrofit.databinding.FragmentTestBinding;
+import com.ls.retrofit.databinding.FragmentRetrofitBinding;
 import com.ls.retrofit.vo.WeatherVo;
 
 import rx.Subscriber;
@@ -24,9 +24,9 @@ import rx.schedulers.Schedulers;
  * Created by liu song on 2017/2/22.
  */
 
-public class TestFragment extends BaseFragment implements View.OnClickListener {
+public class RetrofitFragment extends BaseFragment implements View.OnClickListener {
 
-    private FragmentTestBinding mBinding;
+    private FragmentRetrofitBinding mBinding;
 
     private Context mContext;
 
@@ -39,7 +39,7 @@ public class TestFragment extends BaseFragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_retrofit, container, false);
         mBinding.setOnClickListener(this);
         return mBinding.getRoot();
     }

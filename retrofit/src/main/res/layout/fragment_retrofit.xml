@@ -8,20 +8,20 @@
             type="OnClickListener"/>
     </data>
     
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_fragment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:layout_centerInParent="true"
             android:layout_margin="8dp"
             android:onClick="@{onClickListener.onClick}"
-            android:text="Fragment Request"/>
+            android:text="请求天气"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 </layout>
 
