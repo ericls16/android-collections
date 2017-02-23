@@ -10,6 +10,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.ls.retrofit.app.App;
 import com.ls.retrofit.app.Constants;
+import com.ls.retrofit.custom.cookie_jar.CookieManager;
 
 import java.util.Map;
 
@@ -56,7 +57,9 @@ public class ApiServiceFactory {
      * -------------------
      */
     private static void initRetrofit() {
-        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+        //PersistentCookieJar第三方库来管理cookie
+//        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
                 //--------------------------------------
                 //拦截请求，添加header请求头，重新发送，可以添加自定义拦截器。
@@ -75,8 +78,8 @@ public class ApiServiceFactory {
                 })*/
                 //--------------------------------------
                 .addNetworkInterceptor(new StethoInterceptor())
-//                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie(手动实现CookieManager )
-                .cookieJar(cookieJar)
+                .cookieJar(new CookieManager(App.getInstance())) //自动管理cookie(手动实现CookieManager )
+//                .cookieJar(cookieJar) //第三方库管理cookie
                 .build();
         RETROFIT = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
