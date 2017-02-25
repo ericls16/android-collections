@@ -60,6 +60,13 @@
             android:onClick="onClick"
             android:text="flatMap：打印所有学生各自选修的课程"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_do_on_subscribe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="doOnSubscribe"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 </layout>

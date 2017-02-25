@@ -67,7 +67,7 @@ public class RetrofitActivity extends BaseActivity implements View.OnClickListen
 
                     @Override
                     public void onCompleted() {
-                        Toast.makeText(RetrofitActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(RetrofitActivity.this, "onCompleted", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -77,7 +77,7 @@ public class RetrofitActivity extends BaseActivity implements View.OnClickListen
 
                     @Override
                     public void onNext(WeatherVo dataSet) {
-                        Toast.makeText(RetrofitActivity.this, "天气预报时间：" + dataSet.getResult().getData().getWeather().get(0).getDate(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RetrofitActivity.this, "onNext=天气预报时间：" + dataSet.getResult().getData().getWeather().get(0).getDate(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

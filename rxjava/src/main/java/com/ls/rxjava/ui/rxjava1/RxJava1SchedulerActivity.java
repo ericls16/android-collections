@@ -20,6 +20,7 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -120,6 +121,9 @@ public class RxJava1SchedulerActivity extends AppCompatActivity implements View.
             case R.id.btn_flatmap_print_student_course:
                 printCourseOfStudentUseFlatMap();
                 break;
+            case R.id.btn_do_on_subscribe:
+                useDoOnSubscriber();
+                break;
             default:
                 break;
         }
@@ -155,14 +159,15 @@ public class RxJava1SchedulerActivity extends AppCompatActivity implements View.
      */
     private void useObserverOnAndSubscribeOnShowImage() {
         Toast.makeText(this, "结果请查看log打印", Toast.LENGTH_SHORT).show();
-        Observable.create(new Observable.OnSubscribe<Drawable>() {
-            @Override
-            public void call(Subscriber<? super Drawable> subscriber) {
-                Drawable drawable = getTheme().getDrawable(R.mipmap.uselessl);
-                subscriber.onNext(drawable);
-                subscriber.onCompleted();
-            }
-        })
+        Observable
+                .create(new Observable.OnSubscribe<Drawable>() {
+                    @Override
+                    public void call(Subscriber<? super Drawable> subscriber) {
+                        Drawable drawable = getTheme().getDrawable(R.mipmap.uselessl);
+                        subscriber.onNext(drawable);
+                        subscriber.onCompleted();
+                    }
+                })
                 .subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
                 .subscribe(new Observer<Drawable>() {
@@ -362,6 +367,46 @@ public class RxJava1SchedulerActivity extends AppCompatActivity implements View.
 //                    showMessages(messages);
 //                }
 //            });
+    }
+
+    /**
+     * doOnSubscribe在subscribe()调用后,而且在事件发送前执行;
+     */
+    private void useDoOnSubscriber() {
+        Toast.makeText(this, "请查看方法的使用", Toast.LENGTH_SHORT).show();
+        Observable
+                .create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                //如果在 doOnSubscribe()之后有subscribeOn()的话，它将执行在离它最近的subscribeOn()所指定的线程。
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+                });
     }
 
 
