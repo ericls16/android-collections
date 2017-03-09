@@ -199,7 +199,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setContentTitle("我是伴有铃声效果的通知")
                 .setContentText("美妙么?安静听~")
                 //调用自己提供的铃声
-                //.setSound(Uri.parse("file:///sdcard/xx/xx.mp3"))
+                //.setSound(Uri.parse("file:///sdcard/Space/Space.mp3"))
                 //.setSound(getSystemDefultRingtoneUri())
                 //调用系统多媒体裤内的铃声
                 //.setSound(Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,"1"))
