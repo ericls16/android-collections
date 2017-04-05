@@ -28,7 +28,7 @@ public class DownloadManagerUpdateAppActivity extends AppCompatActivity implemen
 
     private ActivityDownloadmanagerUpdateAppBinding mBinding;
     private AlertDialog.Builder mDialog;
-    private static final String apkurl = "http://www.lewei.online/sources/xxx.apk";
+    private static final String apkurl = "https://raw.githubusercontent.com/cnlius/resource/master/apk/collections.apk";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
