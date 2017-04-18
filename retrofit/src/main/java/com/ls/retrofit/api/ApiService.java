@@ -1,6 +1,7 @@
 package com.ls.retrofit.api;
 
-import com.android.annotations.NonNull;
+import android.support.annotation.NonNull;
+
 import com.ls.retrofit.vo.ApiCommonVo;
 import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
