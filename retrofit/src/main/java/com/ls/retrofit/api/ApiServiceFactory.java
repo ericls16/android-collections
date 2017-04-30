@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by liu song on 2017/2/21.
@@ -82,7 +83,8 @@ public class ApiServiceFactory {
                 .client(okhttpClient)
                 .addConverterFactory(GsonConverterFactory.create()) //Gson
 //                .addConverterFactory(FastJsonConvertFactory.create()) //FastJson
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //添加对Rxjava的适配
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //添加对Rxjava的适配
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io())) //让请求发生在io线程
                 .build();
     }
 

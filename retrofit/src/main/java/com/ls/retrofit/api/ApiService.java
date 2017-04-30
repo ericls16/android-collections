@@ -3,10 +3,12 @@ package com.ls.retrofit.api;
 import android.support.annotation.NonNull;
 
 import com.ls.retrofit.vo.ApiCommonVo;
+import com.ls.retrofit.vo.CommonVo;
 import com.ls.retrofit.vo.WeatherBean;
 import com.ls.retrofit.vo.WeatherVo;
 
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -19,12 +21,20 @@ import rx.Observable;
 public interface ApiService {
 
     @GET("http://op.juhe.cn/onebox/weather/query")
-    Observable<WeatherVo> queryWeather(@NonNull @Query("cityname") String cityname,
-                                       @NonNull @Query("key") String key);
+    Observable<WeatherVo> queryWeather(
+            @NonNull @Query("cityname") String cityname,
+            @NonNull @Query("key") String key
+    );
 
     @GET("http://op.juhe.cn/onebox/weather/query")
-    Observable<ApiCommonVo<WeatherBean>> queryWeatherBean(@NonNull @Query("cityname") String cityname,
-                                                          @NonNull @Query("key") String key);
+    Observable<ApiCommonVo<WeatherBean>> queryWeatherBean(
+            @NonNull @Query("cityname") String cityname,
+            @NonNull @Query("key") String key
+    );
 
+    @POST("http://op.juhe.cn/onebox/weather/query")
+    Observable<CommonVo> register(
+            @NonNull @Query("cityname") String cityname
+    );
 
 }
